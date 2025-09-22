@@ -34,8 +34,7 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -427692513766899921}
-  m_StateMachineBehaviours:
-  - {fileID: -4644603050864899807}
+  m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -151,8 +150,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: 8335653937480723276}
   - {fileID: -305215004410583345}
-  m_StateMachineBehaviours:
-  - {fileID: -1094682789918123085}
+  m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -283,8 +281,8 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.6875
-  m_HasExitTime: 1
+  m_ExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -620,7 +618,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player
+  m_Name: GreenPlayer
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: speedX
@@ -960,8 +958,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: 5722473539357645118}
   - {fileID: -5373407628733542533}
-  m_StateMachineBehaviours:
-  - {fileID: 7235649406820512749}
+  m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -988,8 +985,7 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -8909867497145609831}
-  m_StateMachineBehaviours:
-  - {fileID: 7660843946194817919}
+  m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
