@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GreenJump-1
+  m_Name: BlueFalling
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,9 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 864764750, guid: 57b3814a975bbbb42937e9f0a7799f20, type: 3}
+      value: {fileID: -106742127, guid: ae1dc14605d0aa4479df95cd9ced275f, type: 3}
     - time: 0.1
-      value: {fileID: -353872150, guid: 57b3814a975bbbb42937e9f0a7799f20, type: 3}
+      value: {fileID: -1437078162, guid: ae1dc14605d0aa4479df95cd9ced275f, type: 3}
+    - time: 0.2
+      value: {fileID: -92533125, guid: ae1dc14605d0aa4479df95cd9ced275f, type: 3}
+    - time: 0.3
+      value: {fileID: -934498694, guid: ae1dc14605d0aa4479df95cd9ced275f, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -46,14 +50,16 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 864764750, guid: 57b3814a975bbbb42937e9f0a7799f20, type: 3}
-    - {fileID: -353872150, guid: 57b3814a975bbbb42937e9f0a7799f20, type: 3}
+    - {fileID: -106742127, guid: ae1dc14605d0aa4479df95cd9ced275f, type: 3}
+    - {fileID: -1437078162, guid: ae1dc14605d0aa4479df95cd9ced275f, type: 3}
+    - {fileID: -92533125, guid: ae1dc14605d0aa4479df95cd9ced275f, type: 3}
+    - {fileID: -934498694, guid: ae1dc14605d0aa4479df95cd9ced275f, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.2
+    m_StopTime: 0.4
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

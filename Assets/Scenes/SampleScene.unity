@@ -1576,6 +1576,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BluePlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 4369250970287314550, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6729994162027775820, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
