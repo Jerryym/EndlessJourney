@@ -1555,6 +1555,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6566208990665345414, guid: 660c08a28bf43df459cdb2394b1714b5, type: 3}
+      propertyPath: m_GravityScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6723146553813373868, guid: 660c08a28bf43df459cdb2394b1714b5, type: 3}
+      propertyPath: jumpFocus
+      value: 10.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1572,6 +1580,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 1747334195, guid: ae1dc14605d0aa4479df95cd9ced275f, type: 3}
+    - target: {fileID: 2877528648414968836, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: jumpFocus
+      value: 11.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4369250970287314550, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
       propertyPath: m_Name
       value: BluePlayer
@@ -1624,6 +1636,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 9651164052a74e6469f6ce734939fc6e, type: 2}
+    - target: {fileID: 8063803750746586207, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: m_GravityScale
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
