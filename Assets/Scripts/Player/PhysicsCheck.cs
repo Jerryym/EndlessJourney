@@ -14,10 +14,7 @@ public class PhysicsCheck : MonoBehaviour
 	public LayerMask layer;
 
 	[Header("状态")]
-	/// <summary>
-	/// 是否跳跃
-	/// </summary>
-	public bool isOnGround = false;
+	public bool isOnGround;
 
 	private void Update()
 	{
