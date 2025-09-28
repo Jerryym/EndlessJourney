@@ -6977,7 +6977,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_327
+      name: RiverSurface-1
       rect:
         serializedVersion: 2
         x: 96
@@ -6998,7 +6998,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_328
+      name: RiverSurface-2
       rect:
         serializedVersion: 2
         x: 112
@@ -7019,7 +7019,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_329
+      name: RiverSurface-3
       rect:
         serializedVersion: 2
         x: 128
@@ -7040,7 +7040,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_330
+      name: RiverSurface-4
       rect:
         serializedVersion: 2
         x: 144
@@ -7607,7 +7607,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Water-1
+      name: River-1
       rect:
         serializedVersion: 2
         x: 96
@@ -7628,7 +7628,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Water-2
+      name: River-2
       rect:
         serializedVersion: 2
         x: 112
@@ -7649,7 +7649,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Water-3
+      name: River-3
       rect:
         serializedVersion: 2
         x: 128
@@ -7670,7 +7670,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Water-4
+      name: River-4
       rect:
         serializedVersion: 2
         x: 144
@@ -8153,7 +8153,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Water-5
+      name: River-5
       rect:
         serializedVersion: 2
         x: 96
@@ -8174,7 +8174,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Water-6
+      name: River-6
       rect:
         serializedVersion: 2
         x: 112
@@ -8195,7 +8195,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Water-7
+      name: River-7
       rect:
         serializedVersion: 2
         x: 128
@@ -8216,7 +8216,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Water-8
+      name: River-8
       rect:
         serializedVersion: 2
         x: 144
@@ -10991,11 +10991,7 @@ TextureImporter:
       Forest-1_321: -1133232638
       Forest-1_322: 175102704
       Forest-1_323: -53988675
-      Forest-1_327: 610844171
-      Forest-1_328: 1664138141
-      Forest-1_329: -960154118
       Forest-1_33: -1113390721
-      Forest-1_330: -1262780596
       Forest-1_331: 1656675430
       Forest-1_332: 930314388
       Forest-1_333: -1250133621
@@ -11254,14 +11250,18 @@ TextureImporter:
       Ground2-7: 1947826114
       Ground2-8: -1735567669
       Ground2-9: 67270318
-      Water-1: -415713322
-      Water-2: 284007417
-      Water-3: -1654933407
-      Water-4: 829745360
-      Water-5: -1947825060
-      Water-6: -1165562901
-      Water-7: -714664621
-      Water-8: 1637214397
+      River-1: -415713322
+      River-2: 284007417
+      River-3: -1654933407
+      River-4: 829745360
+      River-5: -1947825060
+      River-6: -1165562901
+      River-7: -714664621
+      River-8: 1637214397
+      RiverSurface-1: 610844171
+      RiverSurface-2: 1664138141
+      RiverSurface-3: -960154118
+      RiverSurface-4: -1262780596
       WaterFall-1: 400039926
       WaterFall-10: -24243540
       WaterFall-11: 511239771
