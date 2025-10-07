@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,29 +18,46 @@ public class PlayerController : MonoBehaviour
 	/// <summary>
 	/// 施加给角色向上的跳跃力
 	/// </summary>
-	public float jumpFocus = 12;
+	public float jumpForce = 12;
+	/// <summary>
+	/// 受击力
+	/// </summary>
+	public float hurtForce = 8;
+	private bool m_bIsHurt = false;
+
+	[Header("Physic Mats")]
+	/// <summary>
+	/// 光滑物理材质
+	/// </summary>
+	public PhysicsMaterial2D smoothMat;
+	/// <summary>
+	/// 粗糙物理材质
+	/// </summary>
+	public PhysicsMaterial2D roughMat;
 
 	private SpriteRenderer m_spriteRenderer = null;
 	private Rigidbody2D m_rigidBody = null;
 	private CapsuleCollider2D m_collider2D = null;
 	private PhysicsCheck m_check = null;
-	/// <summary>
-	/// 玩家输入操作的控制类实例: 用于处理玩家的键盘、手柄等输入事件
-	/// </summary>
 	private PlayerInputControl m_inputActions = null;
+	private PlayerAnimationController m_animationController = null;
 
 	/// <summary>
 	/// 角色跑步速度
 	/// </summary>
-	private float m_runSpeed;
+	private float m_rRunSpeed;
 	/// <summary>
 	/// 角色走路速度
 	/// </summary>
-	private	float m_walkSpeed => speedX / 2.5f;
+	private float m_rWalkSpeed;
 	private bool m_bIsWalking = false;
-	private bool m_bIsSquat = false;
+
 	private Vector2 m_collSize;
 	private Vector2 m_collOffset;
+
+	private bool m_bIsSquat = false;
+	private bool m_bIsDead = false;
+	private bool m_bIsAttack = false;
 
 	private void Awake()
 	{
@@ -47,14 +65,17 @@ public class PlayerController : MonoBehaviour
 		m_rigidBody = GetComponent<Rigidbody2D>();
 		m_collider2D = GetComponent<CapsuleCollider2D>();
 		m_check = GetComponent<PhysicsCheck>();
+		m_inputActions = new PlayerInputControl();
+		m_animationController = GetComponent<PlayerAnimationController>();
 
-		m_runSpeed = speedX;
+		m_rWalkSpeed = speedX / 2.5f;
+		m_rRunSpeed = speedX;
 		m_collSize = m_collider2D.size;
 		m_collOffset = m_collider2D.offset;
 
-		m_inputActions = new PlayerInputControl();
 		m_inputActions.Gameplay.Jump.started += Jump;
 		m_inputActions.Gameplay.Walk.started += Walk;
+		m_inputActions.Gameplay.Attack.started += Attack;
 	}
 
 	private void OnEnable()
@@ -70,11 +91,16 @@ public class PlayerController : MonoBehaviour
 	private void Update()
 	{
 		inputDir = m_inputActions.Gameplay.Move.ReadValue<Vector2>();
+		//修改物理材质
+		ModifyPhysicMat();
 	}
 
 	private void FixedUpdate()
 	{
-		Move();
+		if (!m_bIsHurt && !m_bIsAttack)
+		{
+			Move();
+		}
 	}
 
 	#region Property
@@ -82,6 +108,24 @@ public class PlayerController : MonoBehaviour
 	{
 		set { m_bIsSquat = value; }
 		get { return m_bIsSquat; }
+	}
+
+	public bool IsHurt
+	{
+		set { m_bIsHurt = value; }
+		get { return m_bIsHurt; }
+	}
+
+	public bool IsDead
+	{
+		set { m_bIsDead = value; }
+		get { return m_bIsDead; }
+	}
+
+	public bool IsAttack
+	{
+		set { m_bIsAttack = value; }
+		get { return m_bIsAttack; }
 	}
 	#endregion
 
@@ -115,18 +159,41 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	#region Event Function
+	public void OnDamage(Transform attacker)
+	{
+		m_bIsHurt = true;
+		m_rigidBody.velocity = Vector2.zero;
+
+		//受伤后退
+		Vector2 dirVec = new Vector2(transform.position.x - attacker.position.x, 0).normalized;
+		m_rigidBody.AddForce(dirVec * hurtForce, ForceMode2D.Impulse);
+	}
+
 	/// <summary>
-	/// 跳跃
+	/// 死亡
 	/// </summary>
-	/// <param name="obj"></param>
-	/// <exception cref="NotImplementedException"></exception>
+	public void Dead()
+	{
+		m_bIsDead = true;
+		//禁止输入
+		m_inputActions.Gameplay.Disable();
+	}
+
+	/// <summary>
+	/// 修改物理材质
+	/// </summary>
+	private void ModifyPhysicMat()
+	{
+		m_collider2D.sharedMaterial = m_check.isOnGround ? roughMat : smoothMat;
+	}
+
+	#region Event Function
 	private void Jump(InputAction.CallbackContext obj)
 	{
 		if (m_check.isOnGround)
 		{
 			Debug.Log("Jump");
-			m_rigidBody.AddForce(transform.up * jumpFocus, ForceMode2D.Impulse);
+			m_rigidBody.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
 		}
 	}
 
@@ -136,15 +203,22 @@ public class PlayerController : MonoBehaviour
 		{
 			if (!m_bIsWalking)
 			{
-				speedX = m_walkSpeed;
+				speedX = m_rWalkSpeed;
 				m_bIsWalking = true;
 			}
 			else
 			{
-				speedX = m_runSpeed;
+				speedX = m_rRunSpeed;
 				m_bIsWalking = false;
 			}
 		}
+	}
+
+	private void Attack(InputAction.CallbackContext obj)
+	{
+		//触发攻击动画
+		m_animationController.TriggerAttack();
+		m_bIsAttack = true;
 	}
 	#endregion
 

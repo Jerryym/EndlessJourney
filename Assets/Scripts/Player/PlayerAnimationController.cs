@@ -37,5 +37,23 @@ public class PlayerAnimationController : MonoBehaviour
 		m_animator.SetFloat("speedY", m_rigidbody.velocity.y);
 		m_animator.SetBool("isOnGround", m_physicsCheck.isOnGround);
 		m_animator.SetBool("isSquat", m_playerController.IsSquat);
+		m_animator.SetBool("isDead", m_playerController.IsDead);
+		m_animator.SetBool("isAttack", m_playerController.IsAttack);
+	}
+
+	/// <summary>
+	/// 触发受伤动画
+	/// </summary>
+	public void TriggerHurt()
+	{
+		m_animator.SetTrigger("hurt");
+	}
+
+	/// <summary>
+	/// 触发攻击动画
+	/// </summary>
+	public void TriggerAttack()
+	{
+		m_animator.SetTrigger("attack");
 	}
 }

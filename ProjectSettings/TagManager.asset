@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Bounds
+  - River
   layers:
   - Default
   - TransparentFX
@@ -44,7 +46,7 @@ TagManager:
   - name: Background
     uniqueID: 668152589
     locked: 0
-  - name: Platform
+  - name: Middle
     uniqueID: 2276782775
     locked: 0
   - name: Foreground
