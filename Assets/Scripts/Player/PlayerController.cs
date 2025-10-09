@@ -76,6 +76,7 @@ public class PlayerController : MonoBehaviour
 		m_inputActions.Gameplay.Jump.started += Jump;
 		m_inputActions.Gameplay.Walk.started += Walk;
 		m_inputActions.Gameplay.Attack.started += Attack;
+		m_inputActions.Gameplay.Slide.started += Slide;
 	}
 
 	private void OnEnable()
@@ -219,6 +220,11 @@ public class PlayerController : MonoBehaviour
 		//触发攻击动画
 		m_animationController.TriggerAttack();
 		m_bIsAttack = true;
+	}
+
+	private void Slide(InputAction.CallbackContext context)
+	{
+
 	}
 	#endregion
 
