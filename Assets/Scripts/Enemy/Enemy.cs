@@ -301,4 +301,8 @@ public class Enemy : Character
 		yield return new WaitForSeconds(0.5f);
 		m_bIsHurt = false;
 	}
+
+	public override void PowerChange(float powerCost)
+	{
+	}
 }

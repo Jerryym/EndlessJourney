@@ -16,6 +16,16 @@ public abstract class Character : MonoBehaviour
 	/// </summary>
 	public float currentHealth;
 	/// <summary>
+	/// 最大体力值
+	/// </summary>
+	public float maxPower;
+	/// <summary>
+	/// 当前体力值
+	/// </summary>
+	public float currentPower;
+	
+	public float PowerRecoveryRate = 1f;
+	/// <summary>
 	/// 攻击力
 	/// </summary>
 	public float attack;
@@ -31,6 +41,10 @@ public abstract class Character : MonoBehaviour
 	/// 血量变化事件
 	/// </summary>
 	public UnityEvent<Character> OnHealthChange;
+	/// <summary>
+    /// 体力值变化事件
+    /// </summary>
+	public UnityEvent<Character> OnPowerChange;
 	/// <summary>
 	/// 受伤事件
 	/// </summary>
@@ -54,12 +68,21 @@ public abstract class Character : MonoBehaviour
 	/// </summary>
 	/// <param name="attacker"></param>
 	public abstract void TakeDamage(Character attacker);
+	/// <summary>
+    /// 体力值变化
+    /// </summary>
+    /// <param name="powerCost"></param>
+	public abstract void PowerChange(float powerCost);
 
 	private void Start()
 	{
 		//初始化当前血量
 		currentHealth = maxHealth;
 		OnHealthChange?.Invoke(this);
+
+		//初始化当前体力值
+		currentPower = maxPower;
+		OnPowerChange?.Invoke(this);
 	}
 
 	/// <summary>
