@@ -23,7 +23,18 @@ public class PlayerController : MonoBehaviour
 	/// 受击力
 	/// </summary>
 	public float hurtForce = 8;
-	private bool m_bIsHurt = false;
+	/// <summary>
+	/// 滑行距离
+	/// </summary>
+	public float slideDistance;
+	/// <summary>
+	/// 滑行速度
+	/// </summary>
+	public float slideSpeed;
+	/// <summary>
+    /// 滑行消耗的体力
+    /// </summary>
+	public float slidePowerCost;
 
 	[Header("Physic Mats")]
 	/// <summary>
@@ -39,6 +50,7 @@ public class PlayerController : MonoBehaviour
 	private Rigidbody2D m_rigidBody = null;
 	private CapsuleCollider2D m_collider2D = null;
 	private PhysicsCheck m_check = null;
+	private Character m_character = null;
 	private PlayerInputControl m_inputActions = null;
 	private PlayerAnimationController m_animationController = null;
 
@@ -58,6 +70,8 @@ public class PlayerController : MonoBehaviour
 	private bool m_bIsSquat = false;
 	private bool m_bIsDead = false;
 	private bool m_bIsAttack = false;
+	private bool m_bIsHurt = false;
+	private bool m_bIsSlide = false;
 
 	private void Awake()
 	{
@@ -65,6 +79,7 @@ public class PlayerController : MonoBehaviour
 		m_rigidBody = GetComponent<Rigidbody2D>();
 		m_collider2D = GetComponent<CapsuleCollider2D>();
 		m_check = GetComponent<PhysicsCheck>();
+		m_character = GetComponent<Character>();
 		m_inputActions = new PlayerInputControl();
 		m_animationController = GetComponent<PlayerAnimationController>();
 
@@ -98,7 +113,7 @@ public class PlayerController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		if (!m_bIsHurt && !m_bIsAttack)
+		if (!m_bIsHurt && !m_bIsAttack && !m_bIsSlide)
 		{
 			Move();
 		}
@@ -127,6 +142,12 @@ public class PlayerController : MonoBehaviour
 	{
 		set { m_bIsAttack = value; }
 		get { return m_bIsAttack; }
+	}
+
+	public bool IsSlide
+	{
+		set { m_bIsSlide = value; }
+		get { return m_bIsSlide; }
 	}
 	#endregion
 
@@ -195,6 +216,10 @@ public class PlayerController : MonoBehaviour
 		{
 			Debug.Log("Jump");
 			m_rigidBody.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+
+			//打断滑铲
+			StopCoroutine(nameof(SlideCoroutine));
+			m_bIsSlide = false;
 		}
 	}
 
@@ -224,8 +249,48 @@ public class PlayerController : MonoBehaviour
 
 	private void Slide(InputAction.CallbackContext context)
 	{
+		if (m_check.isOnGround && m_bIsSlide == false && m_character.currentPower >= slidePowerCost)
+		{
+			m_bIsSlide = true;
+			Vector3 targetPos = (m_spriteRenderer.flipX == true) ? 
+								new Vector3(transform.position.x - slideDistance, transform.position.y) : 
+								new Vector3(transform.position.x + slideDistance, transform.position.y);
+			gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+			StartCoroutine(SlideCoroutine(targetPos));
 
+			m_character.PowerChange(slidePowerCost);
+		}
 	}
 	#endregion
+	
+	private IEnumerator SlideCoroutine(Vector3 targetPos)
+	{
+		do
+		{
+			yield return null;
+			if (m_check.isOnGround == false)
+			{
+				break;
+			}
+
+			//检测左右边缘	
+			if ((m_check.isTouchLeft && m_spriteRenderer.flipX == true)|| (m_check.isTouchRight && m_spriteRenderer.flipX == false))
+			{
+				break;
+			}
+
+			if (m_spriteRenderer.flipX == true)
+			{
+				m_rigidBody.MovePosition(new Vector2(transform.position.x - slideSpeed, transform.position.y));
+			}
+			else
+			{
+				m_rigidBody.MovePosition(new Vector2(transform.position.x + slideSpeed, transform.position.y));
+			}
+		} while (Mathf.Abs(targetPos.x - transform.position.x) > 0.1f);
+
+		m_bIsSlide = false;
+		gameObject.layer = LayerMask.NameToLayer("Player");
+	}
 
 }

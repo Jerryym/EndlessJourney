@@ -12,16 +12,19 @@ public class UIManager : MonoBehaviour
 
 	[Header("事件监听")]
 	public CharacterEventSO healthEvent;
+	public CharacterEventSO powerEvent;
 
 	#region Unity消息
 	private void OnEnable()
 	{
 		healthEvent.OnEventRaised += OnHealthEvent;
+		powerEvent.OnEventRaised += OnPowerEvent;
 	}
 
 	private void OnDisable()
 	{
 		healthEvent.OnEventRaised -= OnHealthEvent;
+		powerEvent.OnEventRaised -= OnPowerEvent;
 	}
 	#endregion
 
@@ -29,5 +32,11 @@ public class UIManager : MonoBehaviour
 	{
 		var healthPercent = character.currentHealth / character.maxHealth;
 		playerStateHUD.OnHealthChange(healthPercent);
+	}
+
+	private void OnPowerEvent(Character character)
+	{
+		var powerPercent = character.currentPower / character.maxPower;
+		playerStateHUD.OnPowerChange(powerPercent);
 	}
 }

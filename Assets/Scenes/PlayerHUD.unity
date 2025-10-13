@@ -514,6 +514,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStateHUD: {fileID: 1326851594}
   healthEvent: {fileID: 11400000, guid: 223ae0efdfc10a149b8ad517449049c5, type: 2}
+  powerEvent: {fileID: 11400000, guid: 223ae0efdfc10a149b8ad517449049c5, type: 2}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1428,9 +1429,81 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2877528648414968836, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: slideSpeed
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2877528648414968836, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: slideDistance
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2877528648414968836, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: slidePowerCost
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4369250970287314550, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
       propertyPath: m_Name
       value: BluePlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: maxPower
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: PowerRecoveryRate
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: OnPowerChange.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: OnPowerChange.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: OnPowerChange.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: OnPowerChange.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 223ae0efdfc10a149b8ad517449049c5, type: 2}
+    - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: OnPowerChange.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 223ae0efdfc10a149b8ad517449049c5, type: 2}
+    - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: OnPowerChange.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: OnPowerChange.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: OnPowerChange.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RaiseEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: OnPowerChange.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: RaiseEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: OnPowerChange.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CharacterEventSO, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: OnPowerChange.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: CharacterEventSO, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: OnPowerChange.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: OnPowerChange.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: Character, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6729994162027775820, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
       propertyPath: m_LocalPosition.x

@@ -39,6 +39,7 @@ public class PlayerAnimationController : MonoBehaviour
 		m_animator.SetBool("isSquat", m_playerController.IsSquat);
 		m_animator.SetBool("isDead", m_playerController.IsDead);
 		m_animator.SetBool("isAttack", m_playerController.IsAttack);
+		m_animator.SetBool("isSlide", m_playerController.IsSlide);
 	}
 
 	/// <summary>

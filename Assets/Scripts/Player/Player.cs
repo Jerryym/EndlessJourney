@@ -27,6 +27,11 @@ public class Player : Character
 	private void Update()
 	{
 		base.InvincibityTimer();
+
+		if (currentPower < maxPower)
+        {
+            currentPower += Time.deltaTime * PowerRecoveryRate;
+        }
 	}
 
 	private void OnTriggerStay2D(Collider2D collision)
@@ -56,7 +61,7 @@ public class Player : Character
 			Debug.Log("玩家闪避成功！");
 			return;
 		}
-		m_iConsecutiveMisses ++;
+		m_iConsecutiveMisses++;
 
 		//伤害计算
 		float rDamageReductionRate = defense / (defense + 100f);
@@ -65,7 +70,7 @@ public class Player : Character
 		//生命值扣除
 		currentHealth -= rDamage;
 		currentHealth = Mathf.Max(currentHealth, 0.0f);
-		Debug.Log("current health = " +  currentHealth);
+		Debug.Log("current health = " + currentHealth);
 		if (currentHealth > 0.0f)
 		{
 			//触发无敌
@@ -83,4 +88,9 @@ public class Player : Character
 		OnHealthChange?.Invoke(this);
 	}
 
+	public override void PowerChange(float powerCost)
+	{
+		currentPower -= powerCost;
+		OnPowerChange?.Invoke(this);
+	}
 }
