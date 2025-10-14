@@ -23,7 +23,7 @@ public class PlayerInjuryAnimation : StateMachineBehaviour
 		if (controller)
 		{
 			//重置受伤状态
-			controller.IsHurt = false;
+			//controller.IsHurt = false;
 		}
     }
 

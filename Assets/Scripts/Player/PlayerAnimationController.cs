@@ -36,10 +36,10 @@ public class PlayerAnimationController : MonoBehaviour
 		m_animator.SetFloat("speedX", Mathf.Abs(m_rigidbody.velocity.x));
 		m_animator.SetFloat("speedY", m_rigidbody.velocity.y);
 		m_animator.SetBool("isOnGround", m_physicsCheck.isOnGround);
-		m_animator.SetBool("isSquat", m_playerController.IsSquat);
-		m_animator.SetBool("isDead", m_playerController.IsDead);
-		m_animator.SetBool("isAttack", m_playerController.IsAttack);
-		m_animator.SetBool("isSlide", m_playerController.IsSlide);
+		//m_animator.SetBool("isSquat", m_playerController.IsSquat);
+		//m_animator.SetBool("isDead", m_playerController.IsDead);
+		//m_animator.SetBool("isAttack", m_playerController.IsAttack);
+		//m_animator.SetBool("isSlide", m_playerController.IsSlide);
 	}
 
 	/// <summary>

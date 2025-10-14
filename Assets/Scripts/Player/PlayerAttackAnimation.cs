@@ -10,7 +10,7 @@ public class PlayerAttackAnimation : StateMachineBehaviour
 		PlayerController controller = animator.GetComponent<PlayerController>();
 		if (controller)
 		{
-			controller.IsAttack = true;
+			//controller.IsAttack = true;
 		}
 	}
 
@@ -27,7 +27,7 @@ public class PlayerAttackAnimation : StateMachineBehaviour
 		if (controller)
 		{
 			//重置攻击状态
-			controller.IsAttack = false;
+			//controller.IsAttack = false;
 		}
 	}
 

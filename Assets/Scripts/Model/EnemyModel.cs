@@ -1,18 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class EnemyModel : MonoBehaviour
+[Serializable]//实现可序列化
+public abstract class EnemyModel
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	/// <summary>
+	/// 最大生命值
+	/// </summary>
+	public float MaxHealth { get; }
+	/// <summary>
+	/// 当前生命值
+	/// </summary>
+	public float Health { get; private set; }
+	/// <summary>
+	/// 攻击力
+	/// </summary>
+	public float Attack { get; set; } = 10f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	/// <summary>
+	/// 初始化函数
+	/// </summary>
+	public void Init()
+	{
+		Health = MaxHealth;
+	}
+
+	/// <summary>
+	/// 受到伤害
+	/// </summary>
+	/// <param name="damage"></param>
+	public void TakeDamage(float damage)
+	{
+		Health = Mathf.Max(Health - damage, 0.0f);
+	}
 }

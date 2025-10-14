@@ -1548,8 +1548,43 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4369250970287314550, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1852354601}
   m_SourcePrefab: {fileID: 100100000, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+--- !u!1 &1852354600 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4369250970287314550, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+  m_PrefabInstance: {fileID: 1852354599}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1852354601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852354600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696975b1b277d7c47ada2cb98d661777, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_player:
+    <MaxStamina>k__BackingField: 80
+    <Attack>k__BackingField: 10
+    <Defence>k__BackingField: 5
+    <Evasion>k__BackingField: 10
+    <BaseSpeed>k__BackingField: 130
+    <JumpForce>k__BackingField: 14.5
+    <HurtForce>k__BackingField: 6
+    <SlideDistance>k__BackingField: 4.5
+    <SlideSpeed>k__BackingField: 0.2
+    <SlideCost>k__BackingField: 5
+  inputDirction: {x: 0, y: 0}
+  invincibilityTimer: 2
+  smoothMat: {fileID: 6200000, guid: 0c3149670491d3a41b4e20b684fe2891, type: 2}
+  roughMat: {fileID: 6200000, guid: 2f6bee43501fb3a4e82f1f248bca347a, type: 2}
 --- !u!1 &1855961249
 GameObject:
   m_ObjectHideFlags: 0

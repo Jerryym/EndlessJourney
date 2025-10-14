@@ -167,10 +167,10 @@ public class Enemy : Character
 	{
 		//判断Player是否攻击了
 		PlayerController controller = attacker.gameObject.GetComponent<PlayerController>();
-		if (controller != null && controller.IsAttack != true)
-		{
-			return;
-		}
+		//if (controller != null && controller.IsAttack != true)
+		//{
+		//	return;
+		//}
 
 		//判断是否无敌
 		if (m_bIsInvincible)
