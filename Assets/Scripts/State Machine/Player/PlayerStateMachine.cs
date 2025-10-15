@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /// </summary>
 public class PlayerStateMachine : StateMachine
 {
-	public PlayerController Controller { get; }
+	public PlayerController Controller => m_controller;
 
 	/// <summary>
 	/// 角色控制器
@@ -44,6 +44,6 @@ public class PlayerStateMachine : StateMachine
 		}
 
 		//切换状态
-		SwitchState(playerState);
+		base.SwitchState(playerState);
 	}
 }

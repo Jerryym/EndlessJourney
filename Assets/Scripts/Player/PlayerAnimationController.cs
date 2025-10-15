@@ -6,37 +6,40 @@ using UnityEngine;
 /// <summary>
 /// 角色动画控制器
 /// </summary>
+[RequireComponent(typeof(Animator))]
 public class PlayerAnimationController : MonoBehaviour
 {
 	private Animator m_animator = null;
-	private Rigidbody2D m_rigidbody = null;
-	private PhysicsCheck m_physicsCheck = null;
 	private PlayerController m_playerController = null;
+
+	//Animator参数
+	private readonly int animID_SpeedX = Animator.StringToHash("speedX");
+	private readonly int animID_SpeedY = Animator.StringToHash("speedY");
+	private readonly int animID_IsOnGround = Animator.StringToHash("isOnGround");
+	private readonly int animID_IsSquat = Animator.StringToHash("isSquat");
 
 	private void Awake()
 	{
 		m_animator = GetComponent<Animator>();
-		m_rigidbody = GetComponent<Rigidbody2D>();
-		m_physicsCheck = GetComponent<PhysicsCheck>();
 		m_playerController = GetComponent<PlayerController>();
 	}
 
 	private void Update()
 	{
-		//设置动画状态
-		SetAnimationStatus();
+		//更新动画状态
+		UpdateAnimationStatus();
 	}
 
 	/// <summary>
-	/// 设置动画状态
+	/// 更新动画状态
 	/// </summary>
 	/// <exception cref="NotImplementedException"></exception>
-	private void SetAnimationStatus()
+	private void UpdateAnimationStatus()
 	{
-		m_animator.SetFloat("speedX", Mathf.Abs(m_rigidbody.velocity.x));
-		m_animator.SetFloat("speedY", m_rigidbody.velocity.y);
-		m_animator.SetBool("isOnGround", m_physicsCheck.isOnGround);
-		//m_animator.SetBool("isSquat", m_playerController.IsSquat);
+		m_animator.SetFloat(animID_SpeedX, Mathf.Abs(m_playerController.GetVelocity.x));
+		m_animator.SetFloat(animID_SpeedY, m_playerController.GetVelocity.y);
+		m_animator.SetBool(animID_IsOnGround, m_playerController.IsOnGround);
+		m_animator.SetBool(animID_IsSquat, m_playerController.IsSquat);
 		//m_animator.SetBool("isDead", m_playerController.IsDead);
 		//m_animator.SetBool("isAttack", m_playerController.IsAttack);
 		//m_animator.SetBool("isSlide", m_playerController.IsSlide);

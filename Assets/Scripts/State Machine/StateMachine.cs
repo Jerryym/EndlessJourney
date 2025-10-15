@@ -22,7 +22,7 @@ public class StateMachine
 	/// 切换状态
 	/// </summary>
 	/// <param name="newState">新状态</param>
-	public virtual void SwitchState(IState newState)
+	protected void SwitchState(IState newState)
 	{
 		if (newState == currentState)
 		{

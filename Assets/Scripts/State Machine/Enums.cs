@@ -8,7 +8,9 @@ namespace FSM.Enums
 		None = -1,
 		Idle,
 		Move,
-		Jump
+		Jump,
+		Squat,
+		Slide
 	}
 
 	/// <summary>

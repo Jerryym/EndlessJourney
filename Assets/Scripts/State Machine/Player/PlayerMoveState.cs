@@ -25,18 +25,41 @@ public class PlayerMoveState : PlayerState
 		stateMachine.Controller.SetVelocity(Vector2.zero);
 	}
 
+	public override void OnUpdate()
+	{
+		var controller = stateMachine.Controller;
+		//空闲
+		if (controller.inputDirection.magnitude < 0.1f)
+		{
+			stateMachine.SwitchState(PlayerStateEnum.Idle);
+			return;
+		}
+
+		//跳跃
+		if (controller.IsOnGround && controller.IsJump)
+		{
+			stateMachine.SwitchState(PlayerStateEnum.Jump);
+			return;
+		}
+
+		//下蹲
+		if (controller.IsSquat)
+		{
+			stateMachine.SwitchState(PlayerStateEnum.Squat);
+			return;
+		}
+
+		//翻转
+		controller.Flip();
+	}
+
 	public override void OnPhysicsUpdate()
 	{
 		var controller = stateMachine.Controller;
-		bool isWalk = controller.IsRunningMode;
-		float speed = (isWalk) ? controller.Player.RunSpeed : controller.Player.WalkSpeed;
+		float speed = (controller.IsRunningMode) ? controller.Player.RunSpeed : controller.Player.WalkSpeed;
 
 		//设置当前速度
-		Vector2 volcity = new Vector2(speed * Time.deltaTime * controller.inputDirction.x, controller.GetVelocity.y);
+		Vector2 volcity = new Vector2(speed * Time.deltaTime * controller.inputDirection.x, controller.GetVelocity.y);
 		stateMachine.Controller.SetVelocity(volcity);
-	}
-
-	public override void OnUpdate()
-	{
 	}
 }

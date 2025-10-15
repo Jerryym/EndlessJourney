@@ -53,10 +53,6 @@ public class PlayerModel
 	/// </summary>
 	public float RunSpeed => 2 * BaseSpeed;
 
-
-	[field: SerializeField]
-	public float JumpForce { get; set; } = 12f;
-
 	[field: SerializeField]
 	public float HurtForce { get; set; } = 8f;
 
