@@ -17,6 +17,7 @@ public class PlayerAnimationController : MonoBehaviour
 	private readonly int animID_SpeedY = Animator.StringToHash("speedY");
 	private readonly int animID_IsOnGround = Animator.StringToHash("isOnGround");
 	private readonly int animID_IsSquat = Animator.StringToHash("isSquat");
+	private readonly int animID_IsSlide = Animator.StringToHash("isSlide");
 
 	private void Awake()
 	{
@@ -40,9 +41,9 @@ public class PlayerAnimationController : MonoBehaviour
 		m_animator.SetFloat(animID_SpeedY, m_playerController.GetVelocity.y);
 		m_animator.SetBool(animID_IsOnGround, m_playerController.IsOnGround);
 		m_animator.SetBool(animID_IsSquat, m_playerController.IsSquat);
-		//m_animator.SetBool("isDead", m_playerController.IsDead);
+		m_animator.SetBool(animID_IsSlide, m_playerController.IsSlide);
 		//m_animator.SetBool("isAttack", m_playerController.IsAttack);
-		//m_animator.SetBool("isSlide", m_playerController.IsSlide);
+		//m_animator.SetBool("isDead", m_playerController.IsDead);
 	}
 
 	/// <summary>

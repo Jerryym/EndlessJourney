@@ -8,11 +8,11 @@ public interface IState
 	/// </summary>
 	void OnEnter();
 	/// <summary>
-	/// 状态逻辑更新: 在 Unity 的 Update() 中调用, 用于处理输入、执行非物理相关的逻辑等操作
+	/// 状态逻辑更新: 在 Unity 的 Update() 中调用, 用于处理输入、游戏逻辑、状态转换(SwitchState)等操作
 	/// </summary>
 	void OnUpdate();
 	/// <summary>
-	/// 状态物理更新: 在 Unity 的 FixedUpdate() 中调用, 用于处理与物理相关的操作
+	/// 状态物理更新: 在 Unity 的 FixedUpdate() 中调用, 用于给gameObject施加力、修改速度等操作
 	/// </summary>
 	void OnPhysicsUpdate();
 	/// <summary>

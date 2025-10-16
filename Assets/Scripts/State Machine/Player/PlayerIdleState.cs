@@ -31,6 +31,13 @@ public class PlayerIdleState : PlayerState
 			stateMachine.SwitchState(PlayerStateEnum.Squat);
 			return;
 		}
+
+		//滑铲
+		if (controller.IsOnGround && controller.IsSlide)
+		{
+			stateMachine.SwitchState(PlayerStateEnum.Slide);
+			return;
+		}
 	}
 
 	public override void OnPhysicsUpdate()

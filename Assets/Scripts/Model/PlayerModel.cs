@@ -57,22 +57,6 @@ public class PlayerModel
 	public float HurtForce { get; set; } = 8f;
 
 	/// <summary>
-	/// 滑铲距离
-	/// </summary>
-	[field: SerializeField]
-	public float SlideDistance { get; private set; }
-	/// <summary>
-	/// 滑铲速度
-	/// </summary>
-	[field: SerializeField]
-	public float SlideSpeed {  get; private set; }
-	/// <summary>
-	/// 滑铲所需的体力消耗
-	/// </summary>
-	[field: SerializeField]
-	public float SlideCost { get; set; }
-
-	/// <summary>
 	/// 初始化
 	/// </summary>
 	public void Init()

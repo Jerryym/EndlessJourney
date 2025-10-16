@@ -10,7 +10,8 @@ namespace FSM.Enums
 		Move,
 		Jump,
 		Squat,
-		Slide
+		Slide,
+		Attack
 	}
 
 	/// <summary>

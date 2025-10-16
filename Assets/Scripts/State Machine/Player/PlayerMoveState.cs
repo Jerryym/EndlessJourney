@@ -49,6 +49,13 @@ public class PlayerMoveState : PlayerState
 			return;
 		}
 
+		//滑铲
+		if (controller.IsOnGround && controller.IsSlide)
+		{
+			stateMachine.SwitchState(PlayerStateEnum.Slide);
+			return;
+		}
+
 		//翻转
 		controller.Flip();
 	}
@@ -59,7 +66,7 @@ public class PlayerMoveState : PlayerState
 		float speed = (controller.IsRunningMode) ? controller.Player.RunSpeed : controller.Player.WalkSpeed;
 
 		//设置当前速度
-		Vector2 volcity = new Vector2(speed * Time.deltaTime * controller.inputDirection.x, controller.GetVelocity.y);
-		stateMachine.Controller.SetVelocity(volcity);
+		Vector2 velocity = new Vector2(speed * Time.deltaTime * controller.inputDirection.x, controller.GetVelocity.y);
+		controller.SetVelocity(velocity);
 	}
 }

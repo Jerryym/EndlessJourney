@@ -1570,7 +1570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 696975b1b277d7c47ada2cb98d661777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputDirction: {x: 0, y: 0}
+  inputDirection: {x: 0, y: 0}
   m_player:
     <MaxStamina>k__BackingField: 80
     <Attack>k__BackingField: 10
@@ -1578,11 +1578,11 @@ MonoBehaviour:
     <Evasion>k__BackingField: 10
     <BaseSpeed>k__BackingField: 140
     <HurtForce>k__BackingField: 6
-    <SlideDistance>k__BackingField: 4.5
-    <SlideSpeed>k__BackingField: 0.2
-    <SlideCost>k__BackingField: 5
   jumpForce: 14.5
   maxJumpCount: 2
+  slideDistance: 4.5
+  slideSpeed: 0.2
+  slideCost: 5
   invincibilityTimer: 2
   smoothMat: {fileID: 6200000, guid: 0c3149670491d3a41b4e20b684fe2891, type: 2}
   roughMat: {fileID: 6200000, guid: 2f6bee43501fb3a4e82f1f248bca347a, type: 2}

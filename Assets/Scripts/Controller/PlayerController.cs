@@ -35,8 +35,35 @@ public class PlayerController : MonoBehaviour
 		get { return m_isJump; }
 		set { m_isJump = value; }
 	}
-	
 	private bool m_isJump = false;
+	#endregion
+
+	#region === 滑铲 ===
+	[Header("滑铲")]
+	/// <summary>
+	/// 滑铲距离
+	/// </summary>
+	public float slideDistance;
+	
+	/// <summary>
+	/// 滑铲速度
+	/// </summary>
+	public float slideSpeed;
+	
+	/// <summary>
+	/// 滑铲所需的体力消耗
+	/// </summary>
+	public float slideCost;
+
+	/// <summary>
+	/// 滑铲状态
+	/// </summary>
+	public bool IsSlide
+	{
+		get { return m_isSlide; }
+		set { m_isSlide = value; }
+	}
+	private bool m_isSlide = false;
 	#endregion
 
 	#region === 无敌 ===
@@ -119,6 +146,7 @@ public class PlayerController : MonoBehaviour
 		//输入控制
 		m_inputActions = new PlayerInputControl();
 		m_inputActions.Gameplay.Jump.started += Jump;
+		m_inputActions.Gameplay.Slide.started += Slide;
 	}
 
 	private void OnEnable()
@@ -163,7 +191,13 @@ public class PlayerController : MonoBehaviour
 	/// </summary>
 	public Vector2 GetVelocity => m_rigidBody.velocity;
 
+	public void MovePosition(Vector2 newPos) => m_rigidBody.MovePosition(newPos);
+
 	public bool IsOnGround => m_check.isOnGround;
+
+	public bool TouchLeft => m_check.isTouchLeft;
+
+	public bool TouchRight => m_check.isTouchRight;
 
 	/// <summary>
 	/// 翻转
@@ -221,6 +255,8 @@ public class PlayerController : MonoBehaviour
 		m_stateMachine.AddState(PlayerStateEnum.Jump, new PlayerJumpState(m_stateMachine));
 		//Squat
 		m_stateMachine.AddState(PlayerStateEnum.Squat, new PlayerSquatState(m_stateMachine));
+		//Slide
+		m_stateMachine.AddState(PlayerStateEnum.Slide, new PlayerSlideState(m_stateMachine));
 		//Attack
 
 		//初始化默认状态为Idle
@@ -251,6 +287,19 @@ public class PlayerController : MonoBehaviour
 	private void Jump(InputAction.CallbackContext context)
 	{
 		m_isJump = true;
+	}
+
+	private void Slide(InputAction.CallbackContext obj)
+	{
+		if (m_check.isOnGround && !m_isSlide)
+		{
+			//当前体力 < 滑铲体力消耗, 则返回，不触发滑铲状态
+			if (m_player.Stamina < slideCost)
+			{
+				return;
+			}
+			m_isSlide = true;
+		}
 	}
 	#endregion
 }
