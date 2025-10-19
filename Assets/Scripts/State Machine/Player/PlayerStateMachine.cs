@@ -2,24 +2,31 @@ using FSM.Enums;
 using System.Collections.Generic;
 
 /// <summary>
-/// 角色状态机
+/// Player状态机
 /// </summary>
 public class PlayerStateMachine : StateMachine
 {
+	/// <summary>
+	/// Player控制器
+	/// </summary>
 	public PlayerController Controller => m_controller;
+	private PlayerController m_controller;
 
 	/// <summary>
-	/// 角色控制器
+	/// Player动画控制器
 	/// </summary>
-	private PlayerController m_controller;
+	public PlayerAnimationController AnimationController => m_animationController;
+	private PlayerAnimationController m_animationController;
+
 	/// <summary>
 	/// 状态字典
 	/// </summary>
 	private Dictionary<PlayerStateEnum, PlayerState> m_stateDic;
 
-	public PlayerStateMachine(PlayerController controller)
+	public PlayerStateMachine(PlayerController controller, PlayerAnimationController animationController)
 	{
 		this.m_controller = controller;
+		this.m_animationController = animationController;
 		m_stateDic = new Dictionary<PlayerStateEnum, PlayerState>();
 	}
 

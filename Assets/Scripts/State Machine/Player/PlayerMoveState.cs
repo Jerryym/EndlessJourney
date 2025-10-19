@@ -2,7 +2,7 @@ using FSM.Enums;
 using UnityEngine;
 
 /// <summary>
-/// 角色移动状态: 处理行走和奔跑的逻辑
+/// Player移动状态: 处理行走和奔跑的逻辑
 /// </summary>
 public class PlayerMoveState : PlayerState
 {
@@ -25,7 +25,7 @@ public class PlayerMoveState : PlayerState
 		stateMachine.Controller.SetVelocity(Vector2.zero);
 	}
 
-	public override void OnUpdate()
+	public override void OnLogicUpdate()
 	{
 		var controller = stateMachine.Controller;
 		//空闲
@@ -56,6 +56,13 @@ public class PlayerMoveState : PlayerState
 			return;
 		}
 
+		//攻击
+		if (controller.IsOnGround && controller.IsAttack)
+		{
+			stateMachine.SwitchState(PlayerStateEnum.Attack);
+			return;
+		}
+
 		//翻转
 		controller.Flip();
 	}
@@ -63,9 +70,13 @@ public class PlayerMoveState : PlayerState
 	public override void OnPhysicsUpdate()
 	{
 		var controller = stateMachine.Controller;
-		float speed = (controller.IsRunningMode) ? controller.Player.RunSpeed : controller.Player.WalkSpeed;
+		if (controller.IsAttack)
+		{
+			return;
+		}
 
 		//设置当前速度
+		float speed = (controller.IsRunningMode) ? controller.Player.playerMovement.RunSpeed : controller.Player.playerMovement.WalkSpeed;
 		Vector2 velocity = new Vector2(speed * Time.deltaTime * controller.inputDirection.x, controller.GetVelocity.y);
 		controller.SetVelocity(velocity);
 	}

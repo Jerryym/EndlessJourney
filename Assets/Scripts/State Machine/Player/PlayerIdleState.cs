@@ -8,7 +8,7 @@ public class PlayerIdleState : PlayerState
 		base.stateEnum = PlayerStateEnum.Idle;
 	}
 
-	public override void OnUpdate()
+	public override void OnLogicUpdate()
 	{
 		var controller = stateMachine.Controller;
 		//移动
@@ -36,6 +36,13 @@ public class PlayerIdleState : PlayerState
 		if (controller.IsOnGround && controller.IsSlide)
 		{
 			stateMachine.SwitchState(PlayerStateEnum.Slide);
+			return;
+		}
+
+		//攻击
+		if (controller.IsOnGround && controller.IsAttack)
+		{
+			stateMachine.SwitchState(PlayerStateEnum.Attack);
 			return;
 		}
 	}

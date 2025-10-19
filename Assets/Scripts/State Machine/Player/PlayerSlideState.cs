@@ -17,7 +17,7 @@ public class PlayerSlideState : PlayerState
 	{
 		var controller = stateMachine.Controller;
 		//计算目标点
-		m_targetPos = new Vector3(controller.transform.position.x + controller.slideDistance * controller.transform.localScale.x, controller.transform.position.y);
+		m_targetPos = new Vector3(controller.transform.position.x + controller.Player.playerMovement.SlideCost * controller.transform.localScale.x, controller.transform.position.y);
 		//设置图层
 		controller.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
 	}
@@ -27,7 +27,7 @@ public class PlayerSlideState : PlayerState
 		ResetState();
 	}
 
-	public override void OnUpdate()
+	public override void OnLogicUpdate()
 	{
 		var controller = stateMachine.Controller;
 		//跳跃
@@ -57,7 +57,7 @@ public class PlayerSlideState : PlayerState
 		}
 
 		//滑铲位移
-		float speed = controller.transform.localScale.x * controller.slideSpeed;
+		float speed = controller.transform.localScale.x * controller.Player.playerMovement.SlideSpeed;
 		Vector2 position = new Vector2(controller.transform.position.x + speed, controller.transform.position.y);
 		controller.MovePosition(position);
 	}

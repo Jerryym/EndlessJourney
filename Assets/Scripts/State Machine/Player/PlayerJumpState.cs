@@ -26,7 +26,7 @@ public class PlayerJumpState : PlayerState
 		stateMachine.Controller.IsJump = false;
 	}
 
-	public override void OnUpdate()
+	public override void OnLogicUpdate()
 	{
 		var controller = stateMachine.Controller;
 		//落地检测
@@ -41,7 +41,7 @@ public class PlayerJumpState : PlayerState
 		bool isAerially = controller.GetVelocity.y < 0.0f;
 		if (!controller.IsOnGround && isAerially)
 		{
-			if (m_jumpCount < controller.maxJumpCount && controller.IsJump)
+			if (m_jumpCount < controller.Player.playerMovement.MaxJumpCount && controller.IsJump)
 			{
 				Jump();
 			}
@@ -54,7 +54,7 @@ public class PlayerJumpState : PlayerState
 	public override void OnPhysicsUpdate()
 	{
 		var controller = stateMachine.Controller;
-		float speed = controller.Player.BaseSpeed;
+		float speed = controller.Player.playerMovement.BaseSpeed;
 		Vector2 volcity = new Vector2(speed * Time.deltaTime * controller.inputDirection.x, controller.GetVelocity.y);
 		stateMachine.Controller.SetVelocity(volcity);
 	}

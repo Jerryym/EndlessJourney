@@ -1,7 +1,7 @@
 namespace FSM.Enums
 {
 	/// <summary>
-	/// 角色状态枚举
+	/// Player状态枚举
 	/// </summary>
 	public enum PlayerStateEnum
 	{
@@ -11,7 +11,8 @@ namespace FSM.Enums
 		Jump,
 		Squat,
 		Slide,
-		Attack
+		Attack,
+		Hurt
 	}
 
 	/// <summary>

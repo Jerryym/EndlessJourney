@@ -18,15 +18,7 @@ public class PlayerController : MonoBehaviour
 	public PlayerModel Player => m_player;
 	#endregion
 
-	#region === 跳跃 ===
-	[Header("跳跃")]
-	public float jumpForce = 12f;
-	
-	/// <summary>
-	/// 最大跳跃次数
-	/// </summary>
-	public int maxJumpCount = 2;
-	
+	#region === 跳跃状态 ===
 	/// <summary>
 	/// 跳跃状态
 	/// </summary>
@@ -38,23 +30,7 @@ public class PlayerController : MonoBehaviour
 	private bool m_isJump = false;
 	#endregion
 
-	#region === 滑铲 ===
-	[Header("滑铲")]
-	/// <summary>
-	/// 滑铲距离
-	/// </summary>
-	public float slideDistance;
-	
-	/// <summary>
-	/// 滑铲速度
-	/// </summary>
-	public float slideSpeed;
-	
-	/// <summary>
-	/// 滑铲所需的体力消耗
-	/// </summary>
-	public float slideCost;
-
+	#region === 滑铲状态 ===
 	/// <summary>
 	/// 滑铲状态
 	/// </summary>
@@ -66,13 +42,17 @@ public class PlayerController : MonoBehaviour
 	private bool m_isSlide = false;
 	#endregion
 
+	#region === 攻击状态 ===
+	public bool IsAttack
+	{
+		get { return m_isAttack; }
+		set { m_isAttack = value; }
+	}
+	private bool m_isAttack = false;
+	#endregion
+
 	#region === 无敌 ===
 	[Header("无敌")]
-	/// <summary>
-	/// 无敌时间
-	/// </summary>
-	public float invincibilityTimer = 2f;
-	
 	/// <summary>
 	/// 当前无敌剩余时间
 	/// </summary>
@@ -115,6 +95,16 @@ public class PlayerController : MonoBehaviour
 	/// </summary>
 	public bool IsSquat => m_inputActions.Gameplay.Squat.IsPressed();
 
+	/// <summary>
+	/// 受击状态
+	/// </summary>
+	public bool IsHurt
+	{
+		get { return m_isHurt; }
+		set { m_isHurt = value; }
+	}
+	private bool m_isHurt = false;
+
 	//碰撞体尺寸信息
 	private Vector2 m_coll2DSize;
 	private Vector2 m_coll2DOffset;
@@ -137,9 +127,6 @@ public class PlayerController : MonoBehaviour
 		m_coll2DSize = m_collider2D.size;
 		m_coll2DOffset = m_collider2D.offset;
 
-		//初始化PlayerModel数据
-		m_player.Init();
-
 		//初始化状态机
 		InitStateMachine();
 
@@ -147,6 +134,7 @@ public class PlayerController : MonoBehaviour
 		m_inputActions = new PlayerInputControl();
 		m_inputActions.Gameplay.Jump.started += Jump;
 		m_inputActions.Gameplay.Slide.started += Slide;
+		m_inputActions.Gameplay.Attack.started += Attack;
 	}
 
 	private void OnEnable()
@@ -221,7 +209,7 @@ public class PlayerController : MonoBehaviour
 	{
 		if (m_isJump)
 		{
-			m_rigidBody.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+			m_rigidBody.AddForce(transform.up * m_player.playerMovement.JumpForce, ForceMode2D.Impulse);
 		}
 	}
 
@@ -237,7 +225,7 @@ public class PlayerController : MonoBehaviour
 	/// <summary>
 	/// 启动无敌计时
 	/// </summary>
-	public void StartInvincibility() => m_invincibilityDuration = invincibilityTimer;
+	public void StartInvincibility() => m_invincibilityDuration = m_player.playerAbility.InvincibilityTimer;
 	#endregion
 
 	#region === 私有方法 ===
@@ -246,7 +234,7 @@ public class PlayerController : MonoBehaviour
 	/// </summary>
 	private void InitStateMachine()
 	{
-		m_stateMachine = new PlayerStateMachine(this);
+		m_stateMachine = new PlayerStateMachine(this, GetComponent<PlayerAnimationController>());
 		//Idle
 		m_stateMachine.AddState(PlayerStateEnum.Idle, new PlayerIdleState(m_stateMachine));
 		//Move
@@ -258,6 +246,9 @@ public class PlayerController : MonoBehaviour
 		//Slide
 		m_stateMachine.AddState(PlayerStateEnum.Slide, new PlayerSlideState(m_stateMachine));
 		//Attack
+		m_stateMachine.AddState(PlayerStateEnum.Attack, new PlayerAttackState(m_stateMachine));
+		//Hurt
+		m_stateMachine.AddState(PlayerStateEnum.Hurt, new PlayerHurtState(m_stateMachine));
 
 		//初始化默认状态为Idle
 		m_stateMachine.SwitchState(PlayerStateEnum.Idle);
@@ -293,13 +284,17 @@ public class PlayerController : MonoBehaviour
 	{
 		if (m_check.isOnGround && !m_isSlide)
 		{
-			//当前体力 < 滑铲体力消耗, 则返回，不触发滑铲状态
-			if (m_player.Stamina < slideCost)
+			if (m_player.CanSlide() != true)
 			{
 				return;
 			}
 			m_isSlide = true;
 		}
+	}
+
+	private void Attack(InputAction.CallbackContext obj)
+	{
+		m_isAttack = true;
 	}
 	#endregion
 }

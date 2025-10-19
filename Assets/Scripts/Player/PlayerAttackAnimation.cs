@@ -5,14 +5,10 @@ using UnityEngine;
 public class PlayerAttackAnimation : StateMachineBehaviour
 {
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-	{
-		PlayerController controller = animator.GetComponent<PlayerController>();
-		if (controller)
-		{
-			//controller.IsAttack = true;
-		}
-	}
+	//override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+	//{
+	//
+	//}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	//override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -27,7 +23,7 @@ public class PlayerAttackAnimation : StateMachineBehaviour
 		if (controller)
 		{
 			//重置攻击状态
-			//controller.IsAttack = false;
+			controller.IsAttack = false;
 		}
 	}
 

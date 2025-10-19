@@ -10,7 +10,7 @@ public class StateMachine
 
 	public virtual void Update()
 	{
-		currentState?.OnUpdate();
+		currentState?.OnLogicUpdate();
 	}
 
 	public virtual void FixedUpdate()

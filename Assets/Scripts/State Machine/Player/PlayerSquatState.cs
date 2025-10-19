@@ -19,7 +19,7 @@ public class PlayerSquatState : PlayerState
 		stateMachine.Controller.ModifyColliderSize();
 	}
 
-	public override void OnUpdate()
+	public override void OnLogicUpdate()
 	{
 		var controller = stateMachine.Controller;
 		if (controller.IsOnGround && !controller.IsSquat)
