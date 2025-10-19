@@ -1458,12 +1458,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: OnDead.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
       propertyPath: OnPowerChange.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
       propertyPath: OnPowerChange.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: OnTakeDamage.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
       propertyPath: OnPowerChange.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1545,12 +1553,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2877528648414968836, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4369250970287314550, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
-      insertIndex: 7
+      insertIndex: 6
       addedObject: {fileID: 1852354601}
   m_SourcePrefab: {fileID: 100100000, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
 --- !u!1 &1852354600 stripped
@@ -1572,18 +1581,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputDirection: {x: 0, y: 0}
   m_player:
-    <MaxStamina>k__BackingField: 80
-    <Attack>k__BackingField: 10
-    <Defence>k__BackingField: 5
-    <Evasion>k__BackingField: 10
-    <BaseSpeed>k__BackingField: 140
-    <HurtForce>k__BackingField: 6
-  jumpForce: 14.5
-  maxJumpCount: 2
-  slideDistance: 4.5
-  slideSpeed: 0.2
-  slideCost: 5
-  invincibilityTimer: 2
+    playerBasic:
+      <MaxHealth>k__BackingField: 100
+      <MaxStamina>k__BackingField: 80
+    playerCombat:
+      <Attack>k__BackingField: 10
+      <Defence>k__BackingField: 5
+      <Evasion>k__BackingField: 10
+      <HurtForce>k__BackingField: 8
+    playerMovement:
+      <BaseSpeed>k__BackingField: 130
+      <JumpForce>k__BackingField: 14.5
+      <MaxJumpCount>k__BackingField: 2
+      <SlideDistance>k__BackingField: 4.5
+      <SlideSpeed>k__BackingField: 0.2
+      <SlideCost>k__BackingField: 5
+    playerAbility:
+      <InvincibilityTimer>k__BackingField: 2
   smoothMat: {fileID: 6200000, guid: 0c3149670491d3a41b4e20b684fe2891, type: 2}
   roughMat: {fileID: 6200000, guid: 2f6bee43501fb3a4e82f1f248bca347a, type: 2}
 --- !u!1 &1855961249
