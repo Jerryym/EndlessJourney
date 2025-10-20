@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -8,35 +5,25 @@ using UnityEngine;
 /// </summary>
 public class UIManager : MonoBehaviour
 {
-	public PlayerStateHUD playerStateHUD;
+	public HUD_PlayerState playerStateHUD;
 
 	[Header("事件监听")]
-	public CharacterEventSO healthEvent;
-	public CharacterEventSO powerEvent;
+	public GameEventFloat healthEvent;
+	public GameEventFloat powerEvent;
 
-	#region Unity消息
 	private void OnEnable()
 	{
-		healthEvent.OnEventRaised += OnHealthEvent;
-		powerEvent.OnEventRaised += OnPowerEvent;
+		healthEvent.Subscribe(OnHealthEvent);
 	}
 
 	private void OnDisable()
 	{
-		healthEvent.OnEventRaised -= OnHealthEvent;
-		powerEvent.OnEventRaised -= OnPowerEvent;
-	}
-	#endregion
-
-	private void OnHealthEvent(Character character)
-	{
-		var healthPercent = character.currentHealth / character.maxHealth;
-		playerStateHUD.OnHealthChange(healthPercent);
+		healthEvent.UnSubscribe(OnHealthEvent);
 	}
 
-	private void OnPowerEvent(Character character)
+	private void OnHealthEvent(float healthPercent)
 	{
-		var powerPercent = character.currentPower / character.maxPower;
-		playerStateHUD.OnPowerChange(powerPercent);
+		playerStateHUD.UpdateHealth(healthPercent);
 	}
+
 }

@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerStateHUD : MonoBehaviour
+public class HUD_PlayerState : MonoBehaviour
 {
+	[Header("UI组件")]
 	public Image healthImage;
 	public Image healthDelayImage;
 	public Image powerImage;
 
-	private bool m_bIsRecover = false;
+	private void Awake()
+	{
+		//初始化UI
+		healthImage.fillAmount = 1;
+		powerImage.fillAmount = 1;
+	}
 
 	private void Update()
 	{
@@ -17,25 +23,10 @@ public class PlayerStateHUD : MonoBehaviour
 		{
 			healthDelayImage.fillAmount -= Time.deltaTime * 0.5f;
 		}
-
-		if (m_bIsRecover)
-		{
-			powerImage.fillAmount += Time.deltaTime * 0.4f;
-			if (powerImage.fillAmount >= 1f)
-			{
-				m_bIsRecover = false;
-			}
-		}
 	}
 
-	public void OnHealthChange(float percentage)
+	public void UpdateHealth(float percentage)
 	{
 		healthImage.fillAmount = percentage;
-	}
-
-	public void OnPowerChange(float percentage)
-	{
-		powerImage.fillAmount = percentage;
-		m_bIsRecover = true;
 	}
 }

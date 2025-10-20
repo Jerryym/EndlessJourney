@@ -65,7 +65,7 @@ public class PlayerModel
 	/// <returns>如果当前体力大于或等于滑铲消耗的体力，则返回true；否则返回false</returns>
 	public bool CanSlide()
 	{
-		return playerBasic.Stamina >= playerMovement.SlideCost;
+		return playerBasic.Power >= playerMovement.SlideCost;
 	}
 
 }

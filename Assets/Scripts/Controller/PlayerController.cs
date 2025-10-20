@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D), typeof(CapsuleCollider2D))]
 [RequireComponent(typeof(PlayerInputControl))]
 [RequireComponent(typeof(PhysicsCheck))]
+[RequireComponent(typeof(PlayerAnimationController))]
 public class PlayerController : MonoBehaviour
 {
 	#region === 玩家数据 ===
@@ -108,6 +109,14 @@ public class PlayerController : MonoBehaviour
 	//碰撞体尺寸信息
 	private Vector2 m_coll2DSize;
 	private Vector2 m_coll2DOffset;
+	#endregion
+
+	#region === 事件 ===
+	[Header("事件")]
+	/// <summary>
+	/// 血量变化事件
+	/// </summary>
+	public GameEventFloat OnHealthChange;
 	#endregion
 
 	#region === 组件 ===

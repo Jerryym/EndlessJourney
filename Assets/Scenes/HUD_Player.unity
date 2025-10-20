@@ -513,8 +513,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStateHUD: {fileID: 1326851594}
-  healthEvent: {fileID: 11400000, guid: 223ae0efdfc10a149b8ad517449049c5, type: 2}
-  powerEvent: {fileID: 11400000, guid: 223ae0efdfc10a149b8ad517449049c5, type: 2}
+  healthEvent: {fileID: 0}
+  powerEvent: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,7 +720,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 60, y: -6}
-  m_SizeDelta: {x: 448, y: 20}
+  m_SizeDelta: {x: 402, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &939570214
 MonoBehaviour:
@@ -869,7 +869,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7.5, y: 0}
+  m_AnchoredPosition: {x: -16, y: 0}
   m_SizeDelta: {x: 630, y: 260}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1145557452
@@ -1177,7 +1177,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1326851592}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b779c0d5d10baf4aace9074aee43ec9, type: 3}
+  m_Script: {fileID: 11500000, guid: d825abb583851934387b55e90c2a4c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   healthImage: {fileID: 94686940}
@@ -1293,7 +1293,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 60, y: -6}
-  m_SizeDelta: {x: 464, y: 25}
+  m_SizeDelta: {x: 416, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1446316737
 MonoBehaviour:
@@ -1583,7 +1583,7 @@ MonoBehaviour:
   m_player:
     playerBasic:
       <MaxHealth>k__BackingField: 100
-      <MaxStamina>k__BackingField: 80
+      <MaxPower>k__BackingField: 80
     playerCombat:
       <Attack>k__BackingField: 10
       <Defence>k__BackingField: 5
@@ -1600,6 +1600,7 @@ MonoBehaviour:
       <InvincibilityTimer>k__BackingField: 2
   smoothMat: {fileID: 6200000, guid: 0c3149670491d3a41b4e20b684fe2891, type: 2}
   roughMat: {fileID: 6200000, guid: 2f6bee43501fb3a4e82f1f248bca347a, type: 2}
+  OnHealthChange: {fileID: 11400000, guid: 32670a2acdfd54547bc2634b1a45d821, type: 2}
 --- !u!1 &1855961249
 GameObject:
   m_ObjectHideFlags: 0

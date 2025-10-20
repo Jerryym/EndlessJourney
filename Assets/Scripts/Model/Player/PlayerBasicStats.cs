@@ -21,15 +21,15 @@ public class PlayerBasicStats
 	/// 最大体力值
 	/// </summary>
 	[field: SerializeField]
-	public float MaxStamina { get; private set; } = 80f;
+	public float MaxPower { get; private set; } = 80f;
 	/// <summary>
 	/// 当前体力值
 	/// </summary>
-	public float Stamina { get; set; } = 10f;
+	public float Power { get; set; } = 10f;
 
 	public PlayerBasicStats()
 	{
 		Health = MaxHealth;
-		Stamina = MaxStamina;
+		Power = MaxPower;
 	}
 }
