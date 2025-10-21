@@ -63,9 +63,18 @@ public class PlayerModel
 	/// 判断当前体力值是否足够执行滑铲
 	/// </summary>
 	/// <returns>如果当前体力大于或等于滑铲消耗的体力，则返回true；否则返回false</returns>
-	public bool CanSlide()
-	{
-		return playerBasic.Power >= playerMovement.SlideCost;
-	}
+	public bool CanSlide() => playerBasic.Power >= playerMovement.SlideCost;
 
+	/// <summary>
+	/// 消耗体力
+	/// </summary>
+	public void ConsumePower(float cost)
+	{
+		if (cost > playerBasic.Power)
+		{
+			playerBasic.Power = 0;
+			return;
+		}
+		playerBasic.Power -= cost;
+	}
 }

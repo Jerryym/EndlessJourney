@@ -29,9 +29,9 @@ public class Player : Character
 		base.InvincibityTimer();
 
 		if (currentPower < maxPower)
-        {
-            currentPower += Time.deltaTime * PowerRecoveryRate;
-        }
+		{
+			currentPower += Time.deltaTime * PowerRecoveryRate;
+		}
 	}
 
 	private void OnTriggerStay2D(Collider2D collision)

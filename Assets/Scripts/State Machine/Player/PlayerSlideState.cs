@@ -17,9 +17,11 @@ public class PlayerSlideState : PlayerState
 	{
 		var controller = stateMachine.Controller;
 		//计算目标点
-		m_targetPos = new Vector3(controller.transform.position.x + controller.Player.playerMovement.SlideCost * controller.transform.localScale.x, controller.transform.position.y);
+		m_targetPos = new Vector3(controller.transform.position.x + controller.Player.playerMovement.SlideDistance * controller.transform.localScale.x, controller.transform.position.y);
 		//设置图层
 		controller.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+		//消耗体力
+		controller.ConsumePower();
 	}
 
 	public override void OnExit()

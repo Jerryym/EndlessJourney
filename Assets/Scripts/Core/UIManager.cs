@@ -14,11 +14,13 @@ public class UIManager : MonoBehaviour
 	private void OnEnable()
 	{
 		healthEvent.Subscribe(OnHealthEvent);
+		powerEvent.Subscribe(OnPowerChangeEvent);
 	}
 
 	private void OnDisable()
 	{
 		healthEvent.UnSubscribe(OnHealthEvent);
+		powerEvent.UnSubscribe(OnPowerChangeEvent);
 	}
 
 	private void OnHealthEvent(float healthPercent)
@@ -26,4 +28,8 @@ public class UIManager : MonoBehaviour
 		playerStateHUD.UpdateHealth(healthPercent);
 	}
 
+	private void OnPowerChangeEvent(float powerPercent)
+	{
+		playerStateHUD.UpdatePower(powerPercent);
+	}
 }

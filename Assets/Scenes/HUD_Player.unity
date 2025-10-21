@@ -513,8 +513,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStateHUD: {fileID: 1326851594}
-  healthEvent: {fileID: 0}
-  powerEvent: {fileID: 0}
+  healthEvent: {fileID: 11400000, guid: 32670a2acdfd54547bc2634b1a45d821, type: 2}
+  powerEvent: {fileID: 11400000, guid: 17b9172e7bb33a0418d7055a4c7f8f4c, type: 2}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,6 +1450,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
       propertyPath: PowerRecoveryRate
       value: 0.4
       objectReference: {fileID: 0}
@@ -1555,6 +1559,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2877528648414968836, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+    - {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -1593,14 +1598,17 @@ MonoBehaviour:
       <BaseSpeed>k__BackingField: 130
       <JumpForce>k__BackingField: 14.5
       <MaxJumpCount>k__BackingField: 2
-      <SlideDistance>k__BackingField: 4.5
+      <SlideDistance>k__BackingField: 4
       <SlideSpeed>k__BackingField: 0.2
-      <SlideCost>k__BackingField: 5
+      <SlideCost>k__BackingField: 6.5
     playerAbility:
       <InvincibilityTimer>k__BackingField: 2
   smoothMat: {fileID: 6200000, guid: 0c3149670491d3a41b4e20b684fe2891, type: 2}
   roughMat: {fileID: 6200000, guid: 2f6bee43501fb3a4e82f1f248bca347a, type: 2}
   OnHealthChange: {fileID: 11400000, guid: 32670a2acdfd54547bc2634b1a45d821, type: 2}
+  OnPowerChange: {fileID: 11400000, guid: 17b9172e7bb33a0418d7055a4c7f8f4c, type: 2}
+  OnTakeDamage: {fileID: 0}
+  OnDeath: {fileID: 11400000, guid: cee602b9f17f9f846a7c77a4d40e8613, type: 2}
 --- !u!1 &1855961249
 GameObject:
   m_ObjectHideFlags: 0

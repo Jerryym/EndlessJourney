@@ -1,6 +1,9 @@
 using FSM.Enums;
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(CapsuleCollider2D))]
 [RequireComponent(typeof(PlayerInputControl))]
@@ -106,9 +109,11 @@ public class PlayerController : MonoBehaviour
 	}
 	private bool m_isHurt = false;
 
-	//碰撞体尺寸信息
-	private Vector2 m_coll2DSize;
-	private Vector2 m_coll2DOffset;
+	/// <summary>
+	/// 死亡章台
+	/// </summary>
+	public bool IsDead => m_isDead;
+	private bool m_isDead = false;
 	#endregion
 
 	#region === 事件 ===
@@ -117,12 +122,28 @@ public class PlayerController : MonoBehaviour
 	/// 血量变化事件
 	/// </summary>
 	public GameEventFloat OnHealthChange;
+	/// <summary>
+	/// 体力变化事件
+	/// </summary>
+	public GameEventFloat OnPowerChange;
+	/// <summary>
+	/// 受伤事件
+	/// </summary>
+	public GameEventTransform OnTakeDamage;
+	/// <summary>
+	/// 死亡事件
+	/// </summary>
+	public GameEventVoid OnDeath;
 	#endregion
 
 	#region === 组件 ===
 	private Rigidbody2D m_rigidBody = null;
 	private CapsuleCollider2D m_collider2D = null;
 	private PhysicsCheck m_check = null;
+
+	//碰撞体尺寸信息
+	private Vector2 m_coll2DSize;
+	private Vector2 m_coll2DOffset;
 	#endregion
 
 	#region === Unity 生命周期函数 ===
@@ -150,12 +171,16 @@ public class PlayerController : MonoBehaviour
 	{
 		//启动输入控制
 		m_inputActions?.Enable();
+		//事件注册
+		OnDeath.Subscribe(Death);
 	}
 
 	private void OnDisable()
 	{
 		//禁用输入控制
 		m_inputActions?.Disable();
+		//取消事件注册
+		OnDeath.Unsubscribe(Death);
 	}
 
 	private void Update()
@@ -173,6 +198,18 @@ public class PlayerController : MonoBehaviour
 	private void FixedUpdate()
 	{
 		m_stateMachine.FixedUpdate();
+	}
+
+	private void OnTriggerStay2D(Collider2D other)
+	{
+		if (other.CompareTag("River"))//落入河中，死亡
+		{
+			m_player.playerBasic.Health = 0;
+			//触发血量变化事件
+			OnHealthChange.Raise(m_player.playerBasic.Health / m_player.playerBasic.MaxHealth);
+			//触发死亡事件
+			OnDeath.Raise();
+		}
 	}
 	#endregion
 
@@ -231,6 +268,18 @@ public class PlayerController : MonoBehaviour
 		m_collider2D.offset = IsSquat ? new Vector2(-0.05f, 0.85f) : m_coll2DOffset;
 	}
 
+	public void ConsumePower()
+	{
+		if (m_isSlide)
+		{
+			m_player.ConsumePower(m_player.playerMovement.SlideCost);
+		}
+
+		//触发体力事件
+		float powerPercent = m_player.playerBasic.Power / m_player.playerBasic.MaxPower;
+		OnPowerChange.Raise(powerPercent);
+	}
+
 	/// <summary>
 	/// 启动无敌计时
 	/// </summary>
@@ -280,6 +329,16 @@ public class PlayerController : MonoBehaviour
 		{
 			m_invincibilityDuration -= Time.deltaTime;
 		}
+	}
+
+	/// <summary>
+	/// 死亡
+	/// </summary>
+	private void Death()
+	{
+		m_isDead = true;
+		//禁用输入控制
+		m_inputActions.Gameplay.Disable();
 	}
 	#endregion
 

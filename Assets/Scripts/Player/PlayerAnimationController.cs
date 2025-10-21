@@ -18,6 +18,7 @@ public class PlayerAnimationController : MonoBehaviour
 	private readonly int m_animID_IsSlide = Animator.StringToHash("isSlide");
 	private readonly int m_animID_IsAttack = Animator.StringToHash("isAttack");
 	private readonly int m_animID_Attack = Animator.StringToHash("attack");
+	private readonly int m_animID_IsDead = Animator.StringToHash("isDead");
 
 	private void Awake()
 	{
@@ -34,7 +35,6 @@ public class PlayerAnimationController : MonoBehaviour
 	/// <summary>
 	/// 更新动画状态
 	/// </summary>
-	/// <exception cref="NotImplementedException"></exception>
 	private void UpdateAnimationStatus()
 	{
 		m_animator.SetFloat(m_animID_SpeedX, Mathf.Abs(m_playerController.GetVelocity.x));
@@ -43,7 +43,7 @@ public class PlayerAnimationController : MonoBehaviour
 		m_animator.SetBool(m_animID_IsSquat, m_playerController.IsSquat);
 		m_animator.SetBool(m_animID_IsSlide, m_playerController.IsSlide);
 		m_animator.SetBool(m_animID_IsAttack, m_playerController.IsAttack);
-		//m_animator.SetBool("isDead", m_playerController.IsDead);
+		m_animator.SetBool(m_animID_IsDead, m_playerController.IsDead);
 	}
 
 	/// <summary>
