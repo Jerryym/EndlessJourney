@@ -1,9 +1,6 @@
 using FSM.Enums;
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(CapsuleCollider2D))]
 [RequireComponent(typeof(PlayerInputControl))]
