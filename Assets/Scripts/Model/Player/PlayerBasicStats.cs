@@ -12,10 +12,6 @@ public class PlayerBasicStats
 	/// </summary>
 	[field: SerializeField]
 	public float MaxHealth { get; private set; } = 100f;
-	/// <summary>
-	/// 当前生命值
-	/// </summary>
-	public float Health { get; set; } = 10f;
 
 	/// <summary>
 	/// 最大体力值
@@ -27,9 +23,5 @@ public class PlayerBasicStats
 	/// </summary>
 	public float Power { get; set; } = 10f;
 
-	public PlayerBasicStats()
-	{
-		Health = MaxHealth;
-		Power = MaxPower;
-	}
+	public PlayerBasicStats() {}
 }

@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerAnimationController))]
 public class PlayerController : MonoBehaviour
 {
-	#region === 玩家数据 ===
+	#region 玩家数据
 	/// <summary>
 	/// 输入方向
 	/// </summary>
@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 	public PlayerModel Player => m_player;
 	#endregion
 
-	#region === 跳跃状态 ===
+	#region 跳跃状态
 	/// <summary>
 	/// 跳跃状态
 	/// </summary>
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
 	private bool m_isJump = false;
 	#endregion
 
-	#region === 滑铲状态 ===
+	#region 滑铲状态
 	/// <summary>
 	/// 滑铲状态
 	/// </summary>
@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
 	private bool m_isSlide = false;
 	#endregion
 
-	#region === 攻击状态 ===
+	#region 攻击状态
 	public bool IsAttack
 	{
 		get { return m_isAttack; }
@@ -52,20 +52,18 @@ public class PlayerController : MonoBehaviour
 	private bool m_isAttack = false;
 	#endregion
 
-	#region === 无敌 ===
+	#region 无敌
 	[Header("无敌")]
-	/// <summary>
-	/// 当前无敌剩余时间
-	/// </summary>
+	[Tooltip("无敌计时器")]
+	public float invincibilityTimer = 2f;
 	private float m_invincibilityDuration = 0.0f;
-	
 	/// <summary>
 	/// 无敌状态
 	/// </summary>
 	public bool IsInvincible => m_invincibilityDuration > 0f;
 	#endregion
 
-	#region === 物理材质 ===
+	#region 物理材质
 	[Header("物理材质")]
 	/// <summary>
 	/// 光滑物理材质
@@ -77,7 +75,7 @@ public class PlayerController : MonoBehaviour
 	public PhysicsMaterial2D roughMat;
 	#endregion
 
-	#region === 输入与状态 ===
+	#region 输入与状态
 	private PlayerInputControl m_inputActions = null;
 	private PlayerStateMachine m_stateMachine = null;
 
@@ -107,13 +105,13 @@ public class PlayerController : MonoBehaviour
 	private bool m_isHurt = false;
 
 	/// <summary>
-	/// 死亡章台
+	/// 死亡状态
 	/// </summary>
 	public bool IsDead => m_isDead;
 	private bool m_isDead = false;
 	#endregion
 
-	#region === 事件 ===
+	#region 事件
 	[Header("事件")]
 	/// <summary>
 	/// 血量变化事件
@@ -133,7 +131,7 @@ public class PlayerController : MonoBehaviour
 	public GameEventVoid OnDeath;
 	#endregion
 
-	#region === 组件 ===
+	#region 组件
 	private Rigidbody2D m_rigidBody = null;
 	private CapsuleCollider2D m_collider2D = null;
 	private PhysicsCheck m_check = null;
@@ -143,20 +141,19 @@ public class PlayerController : MonoBehaviour
 	private Vector2 m_coll2DOffset;
 	#endregion
 
-	#region === Unity 生命周期函数 ===
+	#region Unity 生命周期函数
 	private void Awake()
 	{
 		//初始化组件
 		m_rigidBody = GetComponent<Rigidbody2D>();
 		m_collider2D = GetComponent<CapsuleCollider2D>();
 		m_check = GetComponent<PhysicsCheck>();
-
 		m_coll2DSize = m_collider2D.size;
 		m_coll2DOffset = m_collider2D.offset;
-
 		//初始化状态机
 		InitStateMachine();
-
+		//初始化计时器
+		m_invincibilityDuration = invincibilityTimer;
 		//输入控制
 		m_inputActions = new PlayerInputControl();
 		m_inputActions.Gameplay.Jump.started += Jump;
@@ -201,22 +198,21 @@ public class PlayerController : MonoBehaviour
 	{
 		if (other.CompareTag("River"))//落入河中，死亡
 		{
-			m_player.playerBasic.Health = 0;
+			m_player.Health = 0;
 			//触发血量变化事件
-			OnHealthChange.Raise(m_player.playerBasic.Health / m_player.playerBasic.MaxHealth);
+			OnHealthChange.Raise(m_player.Health / m_player.playerBasic.MaxHealth);
 			//触发死亡事件
 			OnDeath.Raise();
 		}
 	}
 	#endregion
 
-	#region === 公共接口 ===
+	#region 公共接口
 	/// <summary>
 	/// 设置速度
 	/// </summary>
 	/// <param name="velocity"></param>
 	public void SetVelocity(Vector2 velocity) => m_rigidBody.velocity = velocity;
-
 	/// <summary>
 	/// 获取速度
 	/// </summary>
@@ -273,17 +269,12 @@ public class PlayerController : MonoBehaviour
 		}
 
 		//触发体力事件
-		float powerPercent = m_player.playerBasic.Power / m_player.playerBasic.MaxPower;
+		float powerPercent = m_player.Power / m_player.playerBasic.MaxPower;
 		OnPowerChange.Raise(powerPercent);
 	}
-
-	/// <summary>
-	/// 启动无敌计时
-	/// </summary>
-	public void StartInvincibility() => m_invincibilityDuration = m_player.playerAbility.InvincibilityTimer;
 	#endregion
 
-	#region === 私有方法 ===
+	#region 私有方法
 	/// <summary>
 	/// 初始化状态机
 	/// </summary>
@@ -339,7 +330,7 @@ public class PlayerController : MonoBehaviour
 	}
 	#endregion
 
-	#region === 事件函数 ===
+	#region 事件函数
 	private void Jump(InputAction.CallbackContext context)
 	{
 		m_isJump = true;

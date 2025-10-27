@@ -2,44 +2,32 @@ using System;
 using UnityEngine;
 
 [Serializable]//实现可序列化
-public abstract class EnemyModel
+public class EnemyModel
 {
 	/// <summary>
-	/// 最大生命值
+	/// 基础属性
 	/// </summary>
 	[field: SerializeField]
-	public float MaxHealth { get; }
-	/// <summary>
-	/// 当前生命值
-	/// </summary>
-	[field: SerializeField]
-	public float Health { get; private set; }
-	/// <summary>
-	/// 攻击力
-	/// </summary>
-	[field: SerializeField]
-	public float Attack { get; set; } = 10f;
+	public EnemyBasicStats enemyBasic = null;
 
 	/// <summary>
-	/// 基础移动速度
+	/// 受伤击退力
 	/// </summary>
 	[field: SerializeField]
-	public float BaseSpeed { get; private set; }
+	public float HurtForce { get; set; } = 2f;
 
-	/// <summary>
-	/// 初始化函数
-	/// </summary>
-	public void Init()
+	private float m_currentHealth;
+
+	public EnemyModel()
 	{
-		Health = MaxHealth;
-	}
+		enemyBasic = new EnemyBasicStats();
 
-	/// <summary>
-	/// 受到伤害
-	/// </summary>
-	/// <param name="damage"></param>
-	public void TakeDamage(float damage)
-	{
-		Health = Mathf.Max(Health - damage, 0.0f);
+		m_currentHealth = enemyBasic.MaxHealth;
 	}
+	
+	public float Health
+    {
+		get { return m_currentHealth; }
+		set { m_currentHealth = value; }
+    }
 }

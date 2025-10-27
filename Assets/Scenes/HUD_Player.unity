@@ -1445,6 +1445,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BluePlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 4369250970287314550, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4933371699610701238, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
       propertyPath: maxPower
       value: 20
@@ -1601,8 +1605,7 @@ MonoBehaviour:
       <SlideDistance>k__BackingField: 4
       <SlideSpeed>k__BackingField: 0.2
       <SlideCost>k__BackingField: 6.5
-    playerAbility:
-      <InvincibilityTimer>k__BackingField: 2
+  invincibilityTimer: 2
   smoothMat: {fileID: 6200000, guid: 0c3149670491d3a41b4e20b684fe2891, type: 2}
   roughMat: {fileID: 6200000, guid: 2f6bee43501fb3a4e82f1f248bca347a, type: 2}
   OnHealthChange: {fileID: 11400000, guid: 32670a2acdfd54547bc2634b1a45d821, type: 2}

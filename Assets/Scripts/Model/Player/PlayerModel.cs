@@ -22,18 +22,17 @@ public class PlayerModel
 	[field: SerializeField]
 	public PlayerMovementConfig playerMovement = null;
 
-	/// <summary>
-	/// 能力配置
-	/// </summary>
-	[field: SerializeField]
-	public PlayerAbilityConfig playerAbility = null;
+	private float m_curretnHealth = 0.0f;
+	private float m_currrentPower = 0.0f;
 
 	public PlayerModel() 
 	{
 		playerBasic = new PlayerBasicStats();
 		playerCombat = new PlayerCombatStats();
 		playerMovement = new PlayerMovementConfig();
-		playerAbility = new PlayerAbilityConfig();
+
+		m_curretnHealth = playerBasic.MaxHealth;
+		m_currrentPower = playerBasic.MaxPower;
 	}
 
 	/// <summary>
@@ -56,25 +55,37 @@ public class PlayerModel
 		rFinalDamage = Mathf.Max(0f, rFinalDamage);
 
 		//生命值扣除
-		playerBasic.Health = Mathf.Max(playerBasic.Health - rFinalDamage, 0.0f);
+		m_curretnHealth = Mathf.Max(m_curretnHealth - rFinalDamage, 0.0f);
 	}
 
 	/// <summary>
 	/// 判断当前体力值是否足够执行滑铲
 	/// </summary>
 	/// <returns>如果当前体力大于或等于滑铲消耗的体力，则返回true；否则返回false</returns>
-	public bool CanSlide() => playerBasic.Power >= playerMovement.SlideCost;
+	public bool CanSlide() => m_currrentPower >= playerMovement.SlideCost;
 
 	/// <summary>
 	/// 消耗体力
 	/// </summary>
 	public void ConsumePower(float cost)
 	{
-		if (cost > playerBasic.Power)
+		if (cost > m_currrentPower)
 		{
-			playerBasic.Power = 0;
+			m_currrentPower = 0;
 			return;
 		}
-		playerBasic.Power -= cost;
+		m_currrentPower -= cost;
+	}
+
+	public float Health
+	{
+		get { return m_curretnHealth; }
+		set { m_currrentPower = value; }
+	}
+
+	public float Power
+	{
+		get { return m_currrentPower; }
+		set { m_currrentPower = value; }
 	}
 }

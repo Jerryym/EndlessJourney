@@ -544,16 +544,53 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlackBoar
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2875557930060784048, guid: 4e404110da89e074cab1f101a23c5b4d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7329264741425685676, guid: 4e404110da89e074cab1f101a23c5b4d, type: 3}
+      insertIndex: 6
+      addedObject: {fileID: 7500063462014231684}
   m_SourcePrefab: {fileID: 100100000, guid: 4e404110da89e074cab1f101a23c5b4d, type: 3}
 --- !u!4 &7500063462014231682 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 412058697415941032, guid: 4e404110da89e074cab1f101a23c5b4d, type: 3}
   m_PrefabInstance: {fileID: 7500063462014231681}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7500063462014231683 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7329264741425685676, guid: 4e404110da89e074cab1f101a23c5b4d, type: 3}
+  m_PrefabInstance: {fileID: 7500063462014231681}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7500063462014231684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7500063462014231683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de4085e448430c347854293749c8def0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_enemy:
+    enemyBasic:
+      <MaxHealth>k__BackingField: 100
+      <Attack>k__BackingField: 10
+      <BaseSpeed>k__BackingField: 100
+      <ChaseSpeedMultiplier>k__BackingField: 2.5
+    <HurtForce>k__BackingField: 2
+  checkBoxOffset: {x: 0, y: 0.65}
+  checkBoxSize: {x: 1, y: 1}
+  detectionDistance: 4.5
+  checkLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  waitTimer: 0.5
+  invincibilityTimer: 0.2
+  lostPlayerFocusTimer: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

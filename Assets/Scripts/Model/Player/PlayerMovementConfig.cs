@@ -7,7 +7,7 @@ using UnityEngine;
 [Serializable]
 public class PlayerMovementConfig
 {
-	#region === 移动 ===
+	#region 移动
 	/// <summary>
 	/// 基础移动速度
 	/// </summary>
@@ -23,14 +23,14 @@ public class PlayerMovementConfig
 	public float RunSpeed => 2 * BaseSpeed;
 	#endregion
 
-	#region === 跳跃 ===
+	#region 跳跃
 	[field: SerializeField]
 	public float JumpForce { get; private set; } = 12f;
 	[field: SerializeField]
 	public int MaxJumpCount { get; private set; } = 2;
 	#endregion
 
-	#region === 滑铲 ===
+	#region 滑铲
 	/// <summary>
 	/// 滑铲距离
 	/// </summary>
