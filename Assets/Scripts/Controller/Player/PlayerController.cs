@@ -293,8 +293,6 @@ public class PlayerController : MonoBehaviour
 		m_stateMachine.AddState(PlayerStateEnum.Slide, new PlayerSlideState(m_stateMachine));
 		//Attack
 		m_stateMachine.AddState(PlayerStateEnum.Attack, new PlayerAttackState(m_stateMachine));
-		//Hurt
-		m_stateMachine.AddState(PlayerStateEnum.Hurt, new PlayerHurtState(m_stateMachine));
 
 		//初始化默认状态为Idle
 		m_stateMachine.SwitchState(PlayerStateEnum.Idle);
