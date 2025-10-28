@@ -188,7 +188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8213596095370939612, guid: 0dc2fe7558a781547b9ac99e40101d6a, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[1].second.m_AnimationSpeed
-      value: 7
+      value: 7.0000005
       objectReference: {fileID: 0}
     - target: {fileID: 8213596095370939612, guid: 0dc2fe7558a781547b9ac99e40101d6a, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[2].second.m_AnimationSpeed
@@ -212,7 +212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8213596095370939612, guid: 0dc2fe7558a781547b9ac99e40101d6a, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[7].second.m_AnimationSpeed
-      value: 7
+      value: 7.0000005
       objectReference: {fileID: 0}
     - target: {fileID: 8213596095370939612, guid: 0dc2fe7558a781547b9ac99e40101d6a, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[8].second.m_AnimationSpeed
@@ -543,6 +543,10 @@ PrefabInstance:
     - target: {fileID: 7329264741425685676, guid: 4e404110da89e074cab1f101a23c5b4d, type: 3}
       propertyPath: m_Name
       value: BlackBoar
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329264741425685676, guid: 4e404110da89e074cab1f101a23c5b4d, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2875557930060784048, guid: 4e404110da89e074cab1f101a23c5b4d, type: 3}

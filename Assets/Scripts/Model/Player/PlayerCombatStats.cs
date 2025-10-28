@@ -22,10 +22,4 @@ public class PlayerCombatStats
 	/// </summary>
 	[field: SerializeField]
 	public float Evasion { get; set; } = 10f;
-
-	/// <summary>
-	/// 受伤击退力
-	/// </summary>
-	[field: SerializeField]
-	public float HurtForce { get; set; } = 8f;
 }

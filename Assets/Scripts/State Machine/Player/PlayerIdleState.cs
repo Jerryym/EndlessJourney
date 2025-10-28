@@ -26,7 +26,7 @@ public class PlayerIdleState : PlayerState
 		}
 
 		//下蹲
-		if (controller.IsSquat)
+		if (controller.IsOnGround && controller.IsSquat)
 		{
 			stateMachine.SwitchState(PlayerStateEnum.Squat);
 			return;

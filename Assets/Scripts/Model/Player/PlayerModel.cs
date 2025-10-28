@@ -9,18 +9,22 @@ public class PlayerModel
 	/// </summary>
 	[field: SerializeField]
 	public PlayerBasicStats playerBasic = null;
-
 	/// <summary>
 	/// 战斗属性
 	/// </summary>
 	[field: SerializeField]
 	public PlayerCombatStats playerCombat = null;
-
 	/// <summary>
 	/// 移动配置
 	/// </summary>
 	[field: SerializeField]
 	public PlayerMovementConfig playerMovement = null;
+
+	/// <summary>
+	/// 受伤击退力
+	/// </summary>
+	[field: SerializeField]
+	public float HurtForce { get; set; } = 8f;
 
 	private float m_curretnHealth = 0.0f;
 	private float m_currrentPower = 0.0f;

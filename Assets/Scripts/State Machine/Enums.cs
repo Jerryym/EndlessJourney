@@ -11,7 +11,8 @@ namespace FSM.Enums
 		Jump,
 		Squat,
 		Slide,
-		Attack
+		Attack,
+		Hurt
 	}
 
 	/// <summary>

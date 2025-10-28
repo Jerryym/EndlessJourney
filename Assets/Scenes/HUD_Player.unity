@@ -1597,7 +1597,6 @@ MonoBehaviour:
       <Attack>k__BackingField: 10
       <Defence>k__BackingField: 5
       <Evasion>k__BackingField: 10
-      <HurtForce>k__BackingField: 8
     playerMovement:
       <BaseSpeed>k__BackingField: 130
       <JumpForce>k__BackingField: 14.5
@@ -1605,12 +1604,13 @@ MonoBehaviour:
       <SlideDistance>k__BackingField: 4
       <SlideSpeed>k__BackingField: 0.2
       <SlideCost>k__BackingField: 6.5
+    <HurtForce>k__BackingField: 6
   invincibilityTimer: 2
   smoothMat: {fileID: 6200000, guid: 0c3149670491d3a41b4e20b684fe2891, type: 2}
   roughMat: {fileID: 6200000, guid: 2f6bee43501fb3a4e82f1f248bca347a, type: 2}
   OnHealthChange: {fileID: 11400000, guid: 32670a2acdfd54547bc2634b1a45d821, type: 2}
   OnPowerChange: {fileID: 11400000, guid: 17b9172e7bb33a0418d7055a4c7f8f4c, type: 2}
-  OnTakeDamage: {fileID: 0}
+  OnTakeDamage: {fileID: 11400000, guid: 5cb686e161afd6946a92735322a4a906, type: 2}
   OnDeath: {fileID: 11400000, guid: cee602b9f17f9f846a7c77a4d40e8613, type: 2}
 --- !u!1 &1855961249
 GameObject:

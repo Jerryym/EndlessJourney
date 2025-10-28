@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bounds
   - River
+  - Enemy
   layers:
   - Default
   - TransparentFX

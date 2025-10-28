@@ -152,8 +152,6 @@ public class PlayerController : MonoBehaviour
 		m_coll2DOffset = m_collider2D.offset;
 		//初始化状态机
 		InitStateMachine();
-		//初始化计时器
-		m_invincibilityDuration = invincibilityTimer;
 		//输入控制
 		m_inputActions = new PlayerInputControl();
 		m_inputActions.Gameplay.Jump.started += Jump;
@@ -166,6 +164,7 @@ public class PlayerController : MonoBehaviour
 		//启动输入控制
 		m_inputActions?.Enable();
 		//事件注册
+		OnTakeDamage.Subscribe(TakeDamage);
 		OnDeath.Subscribe(Death);
 	}
 
@@ -174,6 +173,7 @@ public class PlayerController : MonoBehaviour
 		//禁用输入控制
 		m_inputActions?.Disable();
 		//取消事件注册
+		OnTakeDamage.UnSubscribe(TakeDamage);
 		OnDeath.Unsubscribe(Death);
 	}
 
@@ -196,13 +196,38 @@ public class PlayerController : MonoBehaviour
 
 	private void OnTriggerStay2D(Collider2D other)
 	{
-		if (other.CompareTag("River"))//落入河中，死亡
+		if (other.CompareTag("River"))//落入河中，触发死亡
 		{
-			m_player.Health = 0;
 			//触发血量变化事件
+			m_player.Health = 0;
 			OnHealthChange.Raise(m_player.Health / m_player.playerBasic.MaxHealth);
 			//触发死亡事件
 			OnDeath.Raise();
+		}
+		else if (other.CompareTag("Enemy"))//敌人，触发受伤
+		{
+			if (IsInvincible)//无敌状态，不触发受伤
+			{
+				return;
+			}
+
+			var enemyController = other.GetComponent<EnemyController>();
+			//触发受伤事件
+			OnTakeDamage.Raise(other.transform);
+			//计算血量
+			m_player.TakeDamage(enemyController.Enemy.enemyBasic.Attack);
+			//触发血量变化事件
+			OnHealthChange.Raise(m_player.Health / m_player.playerBasic.MaxHealth);
+			if (m_player.Health <= 0)
+			{
+				//触发死亡事件
+				OnDeath.Raise();
+			}
+            else
+			{
+				//进入无敌状态
+				m_invincibilityDuration = invincibilityTimer;
+            }
 		}
 	}
 	#endregion
@@ -293,6 +318,8 @@ public class PlayerController : MonoBehaviour
 		m_stateMachine.AddState(PlayerStateEnum.Slide, new PlayerSlideState(m_stateMachine));
 		//Attack
 		m_stateMachine.AddState(PlayerStateEnum.Attack, new PlayerAttackState(m_stateMachine));
+		//Hurt
+		m_stateMachine.AddState(PlayerStateEnum.Hurt, new PlayerHurtState(m_stateMachine));
 
 		//初始化默认状态为Idle
 		m_stateMachine.SwitchState(PlayerStateEnum.Idle);
@@ -311,10 +338,26 @@ public class PlayerController : MonoBehaviour
 	/// </summary>
 	private void InvincibilityTimer()
 	{
-		if (m_invincibilityDuration > 0.0f)
-		{
-			m_invincibilityDuration -= Time.deltaTime;
-		}
+		if (IsInvincible)
+        {
+			Debug.Log("无敌: " + m_invincibilityDuration);
+			if (m_invincibilityDuration > 0.0f)
+			{
+				m_invincibilityDuration -= Time.deltaTime;
+			}
+        }
+	}
+
+	/// <summary>
+	/// 受击
+	/// </summary>
+	private void TakeDamage(Transform attacker)
+	{
+		m_stateMachine.SwitchState(PlayerStateEnum.Hurt);
+
+		//受击后退
+		Vector2 dirVec = new Vector2(transform.position.x - attacker.position.x, 0).normalized;
+		m_rigidBody.AddForce(dirVec * m_player.HurtForce, ForceMode2D.Impulse);
 	}
 
 	/// <summary>
@@ -323,6 +366,8 @@ public class PlayerController : MonoBehaviour
 	private void Death()
 	{
 		m_isDead = true;
+		//禁用碰撞
+		gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
 		//禁用输入控制
 		m_inputActions.Gameplay.Disable();
 	}
