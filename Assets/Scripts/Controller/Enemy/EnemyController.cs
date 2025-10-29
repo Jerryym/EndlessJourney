@@ -8,7 +8,7 @@ public abstract class EnemyController : MonoBehaviour
 {
 	public EnemyModel Enemy => m_enemy;
 	[SerializeField]
-	private EnemyModel m_enemy = new EnemyModel();
+	protected EnemyModel m_enemy = new EnemyModel();
 
 	#region 基础属性
 	/// <summary>
@@ -92,7 +92,11 @@ public abstract class EnemyController : MonoBehaviour
 	/// <summary>
 	/// 受击状态
 	/// </summary>
-	public bool IsHurt => m_isHurt;
+	public bool IsHurt
+	{
+		get { return m_isHurt; }
+		set { m_isHurt = value; }
+	}
 	protected bool m_isHurt = false;
 
 	/// <summary>
@@ -102,9 +106,25 @@ public abstract class EnemyController : MonoBehaviour
 	protected bool m_isDead = false;
 	#endregion
 
+	#region 事件
+	[Header("事件")]
+	/// <summary>
+	/// 血量变化事件
+	/// </summary>
+	public GameEventFloat OnHealthChange;
+	/// <summary>
+	/// 受伤事件
+	/// </summary>
+	public GameEventTransform OnTakeDamage;
+	/// <summary>
+	/// 死亡事件
+	/// </summary>
+	public GameEventVoid OnDeath;
+	#endregion
+
 	#region 组件
-	private Rigidbody2D m_rigidBody = null;
-	private PhysicsCheck m_check = null;
+	protected Rigidbody2D m_rigidBody = null;
+	protected PhysicsCheck m_check = null;
 	#endregion
 
 	#region Unity 生命周期函数
@@ -142,6 +162,34 @@ public abstract class EnemyController : MonoBehaviour
 	{
 		m_stateMachine.FixedUpdate();
 	}
+
+	private void OnEnable()
+	{
+		OnTakeDamage.Subscribe(TakeDamage);
+		OnDeath.Subscribe(Death);
+	}
+
+	private void OnDisable()
+	{
+		OnTakeDamage.UnSubscribe(TakeDamage);
+		OnDeath.Unsubscribe(Death);
+	}
+
+	private void OnTriggerStay2D(Collider2D other)
+	{
+		if (other.CompareTag("AttackArea"))
+		{
+			Debug.Log("attacker tag: " + other.gameObject.name);
+			if (IsInvincible)
+			{
+				return;
+			}
+
+			var playerController = other.GetComponent<PlayerController>();
+			//触发受伤
+			OnTakeDamage.Raise(other.transform);
+		}
+	}
 	#endregion
 
 	#region 公共接口
@@ -173,13 +221,29 @@ public abstract class EnemyController : MonoBehaviour
 	protected abstract void InitStateMachine();
 
 	/// <summary>
+	/// 受击
+	/// </summary>
+	/// <param name="transform"></param>
+	protected abstract void TakeDamage(Transform transform);
+
+	/// <summary>
+	/// 死亡
+	/// </summary>
+	protected void Death()
+	{
+		m_isDead = true;
+		DestroyObject();
+	}
+
+	/// <summary>
 	/// 销毁对象
 	/// </summary>
-	protected void DestroyOjbect()
+	protected void DestroyObject()
 	{
 		Destroy(this.gameObject);
 	}
 
+	#region Timer
 	/// <summary>
 	/// 等待计时器
 	/// </summary>
@@ -233,4 +297,5 @@ public abstract class EnemyController : MonoBehaviour
 			m_lostPlayerFocusDuration = lostPlayerFocusTimer;
         }
 	}
+	#endregion
 }

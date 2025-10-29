@@ -1,19 +1,17 @@
 using FSM.Enums;
 using UnityEngine;
 
-public class PlayerHurtState : PlayerState
+public class HurtState : EnemyState
 {
-	public PlayerHurtState(PlayerStateMachine stateMachine) : base(stateMachine)
+	public HurtState(EnemyStateMachine stateMachine) : base(stateMachine)
 	{
-		stateEnum = PlayerStateEnum.Hurt;
+		stateEnum = EnemyStateEnum.Hurt;
 	}
 
 	public override void OnEnter()
 	{
 		stateMachine.Controller.IsHurt = true;
 		stateMachine.Controller.SetVelocity(Vector2.zero);
-		//触发动画
-		stateMachine.AnimationController.TriggerHurt();
 	}
 
 	public override void OnExit()
@@ -24,8 +22,12 @@ public class PlayerHurtState : PlayerState
 	{
 		if (!stateMachine.Controller.IsHurt)
 		{
-			stateMachine.SwitchState(PlayerStateEnum.Idle);
+			stateMachine.SwitchState(EnemyStateEnum.Idle);
 			return;
 		}
+	}
+
+	public override void OnPhysicsUpdate()
+	{
 	}
 }

@@ -212,7 +212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8213596095370939612, guid: 0dc2fe7558a781547b9ac99e40101d6a, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[7].second.m_AnimationSpeed
-      value: 7.0000005
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8213596095370939612, guid: 0dc2fe7558a781547b9ac99e40101d6a, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[8].second.m_AnimationSpeed
@@ -595,6 +595,9 @@ MonoBehaviour:
   waitTimer: 0.5
   invincibilityTimer: 0.2
   lostPlayerFocusTimer: 2
+  OnHealthChange: {fileID: 11400000, guid: 32670a2acdfd54547bc2634b1a45d821, type: 2}
+  OnTakeDamage: {fileID: 11400000, guid: 5cb686e161afd6946a92735322a4a906, type: 2}
+  OnDeath: {fileID: 11400000, guid: cee602b9f17f9f846a7c77a4d40e8613, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

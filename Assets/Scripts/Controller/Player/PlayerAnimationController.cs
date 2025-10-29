@@ -17,8 +17,9 @@ public class PlayerAnimationController : MonoBehaviour
 	private readonly int m_animID_IsSquat = Animator.StringToHash("isSquat");
 	private readonly int m_animID_IsSlide = Animator.StringToHash("isSlide");
 	private readonly int m_animID_IsAttack = Animator.StringToHash("isAttack");
-	private readonly int m_animID_Attack = Animator.StringToHash("attack");
 	private readonly int m_animID_IsDead = Animator.StringToHash("isDead");
+	private readonly int m_animID_Attack = Animator.StringToHash("attack");
+	private readonly int m_animID_Hurt = Animator.StringToHash("hurt");
 
 	private void Awake()
 	{
@@ -51,7 +52,7 @@ public class PlayerAnimationController : MonoBehaviour
 	/// </summary>
 	public void TriggerHurt()
 	{
-		m_animator.SetTrigger("hurt");
+		m_animator.SetTrigger(m_animID_Hurt);
 	}
 
 	/// <summary>

@@ -23,6 +23,7 @@ namespace FSM.Enums
 		None = -1,
 		Idle,
 		Patrol,
-		Chase
+		Chase,
+		Hurt
 	}
 }

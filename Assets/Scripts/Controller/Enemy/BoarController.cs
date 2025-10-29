@@ -20,7 +20,18 @@ public class BoarController : EnemyController
 		m_stateMachine.AddState(EnemyStateEnum.Patrol, new BoarPatrolState(m_stateMachine));
 		//Chase
 		m_stateMachine.AddState(EnemyStateEnum.Chase, new BoarChaseState(m_stateMachine));
+		//Hurt
+		m_stateMachine.AddState(EnemyStateEnum.Hurt, new BoarHurtState(m_stateMachine));
 		//初始状态: Patrol
 		m_stateMachine.SwitchState(EnemyStateEnum.Patrol);	
-    }
+	}
+
+	protected override void TakeDamage(Transform attacker)
+	{
+		m_stateMachine.SwitchState(EnemyStateEnum.Hurt);
+
+		//受击后退
+		Vector2 dirVec = new Vector2(transform.position.x - attacker.position.x, 0).normalized;
+		m_rigidBody.AddForce(dirVec * m_enemy.HurtForce, ForceMode2D.Impulse);
+	}
 }

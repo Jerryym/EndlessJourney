@@ -13,6 +13,7 @@ public class EnemyAnimationController : MonoBehaviour
 	private readonly int m_animID_IsWalk = Animator.StringToHash("isWalk");
 	private readonly int m_animID_IsDead = Animator.StringToHash("isDead");
 	private readonly int m_animID_IsChase = Animator.StringToHash("isChase");
+	private readonly int m_animID_Hurt = Animator.StringToHash("hurt");
 
 	private void Awake()
 	{
@@ -28,7 +29,7 @@ public class EnemyAnimationController : MonoBehaviour
 
 	public void TriggerHurt()
 	{
-		m_animator.SetTrigger("hurt");
+		m_animator.SetTrigger(m_animID_Hurt);
 	}
 
 	/// <summary>

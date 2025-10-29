@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInjuryAnimation : StateMachineBehaviour
+public class EnemyHurtAnimation : StateMachineBehaviour
 {
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	//override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -19,10 +19,9 @@ public class PlayerInjuryAnimation : StateMachineBehaviour
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		PlayerController controller = animator.GetComponent<PlayerController>();
+		var controller = animator.GetComponent<EnemyController>();
 		if (controller)
 		{
-			//重置受伤状态
 			controller.IsHurt = false;
 		}
 	}
