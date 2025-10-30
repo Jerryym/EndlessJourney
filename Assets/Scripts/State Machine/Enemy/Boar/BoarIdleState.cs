@@ -1,7 +1,7 @@
 using FSM.Enums;
 using UnityEngine;
 
-public class BoarIdleState : IdleState
+public class BoarIdleState : EnemyState
 {
 	public BoarIdleState(EnemyStateMachine stateMachine) : base(stateMachine)
 	{

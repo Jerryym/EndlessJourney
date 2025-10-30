@@ -132,6 +132,8 @@ public class PlayerController : MonoBehaviour
 	#endregion
 
 	#region 组件
+	[Header("攻击")]
+	public AttackHitbox[] attacks;
 	private Rigidbody2D m_rigidBody = null;
 	private CapsuleCollider2D m_collider2D = null;
 	private PhysicsCheck m_check = null;
@@ -157,6 +159,11 @@ public class PlayerController : MonoBehaviour
 		m_inputActions.Gameplay.Jump.started += Jump;
 		m_inputActions.Gameplay.Slide.started += Slide;
 		m_inputActions.Gameplay.Attack.started += Attack;
+		//攻击
+		foreach (var attack in attacks)
+		{
+			attack.Controller = this;
+		}
 	}
 
 	private void OnEnable()
@@ -196,6 +203,12 @@ public class PlayerController : MonoBehaviour
 
 	private void OnTriggerStay2D(Collider2D other)
 	{
+		//跳跃过程中不发生碰撞
+		if (m_isJump)
+		{
+			return;
+		}
+
 		if (other.CompareTag("River"))//落入河中，触发死亡
 		{
 			//触发血量变化事件
@@ -203,31 +216,6 @@ public class PlayerController : MonoBehaviour
 			OnHealthChange.Raise(m_player.Health / m_player.playerBasic.MaxHealth);
 			//触发死亡事件
 			OnDeath.Raise();
-		}
-		else if (other.CompareTag("Enemy"))//敌人，触发受伤
-		{
-			if (IsInvincible)//无敌状态，不触发受伤
-			{
-				return;
-			}
-
-			var enemyController = other.GetComponent<EnemyController>();
-			//触发受伤事件
-			OnTakeDamage.Raise(other.transform);
-			//计算血量
-			m_player.TakeDamage(enemyController.Enemy.enemyBasic.Attack);
-			//触发血量变化事件
-			OnHealthChange.Raise(m_player.Health / m_player.playerBasic.MaxHealth);
-			if (m_player.Health <= 0)
-			{
-				//触发死亡事件
-				OnDeath.Raise();
-			}
-            else
-			{
-				//进入无敌状态
-				m_invincibilityDuration = invincibilityTimer;
-            }
 		}
 	}
 	#endregion
@@ -286,6 +274,9 @@ public class PlayerController : MonoBehaviour
 		m_collider2D.offset = IsSquat ? new Vector2(-0.05f, 0.85f) : m_coll2DOffset;
 	}
 
+	/// <summary>
+	/// 消耗体力
+	/// </summary>
 	public void ConsumePower()
 	{
 		if (m_isSlide)
@@ -297,6 +288,15 @@ public class PlayerController : MonoBehaviour
 		float powerPercent = m_player.Power / m_player.playerBasic.MaxPower;
 		OnPowerChange.Raise(powerPercent);
 	}
+
+	public void Attack(Transform target, float damageMul)
+    {
+        if (target.CompareTag("Enemy"))
+        {
+			var enemyController = target.GetComponent<EnemyController>();
+			enemyController.GetHurt(transform, m_player.playerCombat.Attack * damageMul);
+        }
+    }
 	#endregion
 
 	#region 私有方法
@@ -340,7 +340,6 @@ public class PlayerController : MonoBehaviour
 	{
 		if (IsInvincible)
         {
-			Debug.Log("无敌: " + m_invincibilityDuration);
 			if (m_invincibilityDuration > 0.0f)
 			{
 				m_invincibilityDuration -= Time.deltaTime;

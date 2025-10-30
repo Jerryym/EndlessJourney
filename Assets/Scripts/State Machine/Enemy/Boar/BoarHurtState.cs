@@ -1,6 +1,34 @@
-public class BoarHurtState : HurtState
+using FSM.Enums;
+using UnityEngine;
+
+public class BoarHurtState : EnemyState
 {
 	public BoarHurtState(EnemyStateMachine stateMachine) : base(stateMachine)
+	{
+		stateEnum = EnemyStateEnum.Hurt;
+
+	}
+	public override void OnEnter()
+	{
+		stateMachine.Controller.IsHurt = true;
+		stateMachine.Controller.SetVelocity(Vector2.zero);
+		stateMachine.AnimationController.TriggerHurt();
+	}
+
+	public override void OnExit()
+	{
+	}
+
+	public override void OnLogicUpdate()
+	{
+		if (!stateMachine.Controller.IsHurt)
+		{
+			stateMachine.SwitchState(EnemyStateEnum.Idle);
+			return;
+		}
+	}
+
+	public override void OnPhysicsUpdate()
 	{
 	}
 }

@@ -20,9 +20,9 @@ public abstract class EnemyState : IState
 	}
 
 	#region 接口
-	public abstract void OnEnter();
-	public abstract void OnLogicUpdate();
-	public abstract void OnPhysicsUpdate();
-	public abstract void OnExit();
+	public virtual void OnEnter() { }
+	public virtual void OnLogicUpdate() { }
+	public virtual void OnPhysicsUpdate() { }
+	public virtual void OnExit() { }
 	#endregion
 }

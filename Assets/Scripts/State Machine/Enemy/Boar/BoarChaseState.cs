@@ -1,9 +1,12 @@
 using FSM.Enums;
 using UnityEngine;
 
-public class BoarChaseState : ChaseState
+public class BoarChaseState : EnemyState
 {
-    public BoarChaseState(EnemyStateMachine stateMachine) : base(stateMachine) { }
+    public BoarChaseState(EnemyStateMachine stateMachine) : base(stateMachine)
+	{
+		base.stateEnum = EnemyStateEnum.Chase;
+	}
 
     public override void OnEnter()
     {

@@ -24,6 +24,11 @@ public class EnemyModel
 
 		m_currentHealth = enemyBasic.MaxHealth;
 	}
+
+	public void TakeDamage(float damage)
+	{
+		m_currentHealth = Mathf.Max(m_currentHealth - damage, 0.0f);
+	}
 	
 	public float Health
     {

@@ -1,9 +1,12 @@
 using FSM.Enums;
 using UnityEngine;
 
-public class BoarPatrolState : PatrolState
+public class BoarPatrolState : EnemyState
 {
-	public BoarPatrolState(EnemyStateMachine stateMachine) : base(stateMachine) { }
+	public BoarPatrolState(EnemyStateMachine stateMachine) : base(stateMachine)
+	{
+		base.stateEnum = EnemyStateEnum.Patrol;
+	}
 
 	public override void OnEnter()
 	{

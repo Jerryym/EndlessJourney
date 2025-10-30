@@ -137,7 +137,6 @@ public abstract class EnemyController : MonoBehaviour
 		m_stateMachine = new EnemyStateMachine(this, GetComponent<EnemyAnimationController>());
 		//初始化计时器
 		m_waitDuration = waitTimer;
-		m_invincibilityDuration = invincibilityTimer;
 		m_lostPlayerFocusDuration = lostPlayerFocusTimer;
 	}
 
@@ -174,22 +173,6 @@ public abstract class EnemyController : MonoBehaviour
 		OnTakeDamage.UnSubscribe(TakeDamage);
 		OnDeath.Unsubscribe(Death);
 	}
-
-	private void OnTriggerStay2D(Collider2D other)
-	{
-		if (other.CompareTag("AttackArea"))
-		{
-			Debug.Log("attacker tag: " + other.gameObject.name);
-			if (IsInvincible)
-			{
-				return;
-			}
-
-			var playerController = other.GetComponent<PlayerController>();
-			//触发受伤
-			OnTakeDamage.Raise(other.transform);
-		}
-	}
 	#endregion
 
 	#region 公共接口
@@ -210,8 +193,35 @@ public abstract class EnemyController : MonoBehaviour
 	public bool TouchRight => m_check.isTouchRight;
 
 	public bool FindPlayer()
-    {
+	{
 		return Physics2D.BoxCast(transform.position + (Vector3)checkBoxOffset, checkBoxSize, 0, m_faceDir, detectionDistance, checkLayer);
+	}
+	
+	/// <summary>
+    /// 受到伤害
+    /// </summary>
+    /// <param name="attacker">攻击者</param>
+    /// <param name="damage">伤害值</param>
+	public void GetHurt(Transform attacker, float damage)
+	{
+		if (!IsInvincible)
+		{
+			//触发受伤
+			OnTakeDamage.Raise(attacker);
+			//计算血量
+			m_enemy.TakeDamage(damage);
+			Debug.Log("Enemy Health = " + m_enemy.Health);
+			if (m_enemy.Health <= 0)
+			{
+				//触发死亡
+				OnDeath.Raise();
+			}
+			else
+			{
+				//触发无敌
+				m_invincibilityDuration = invincibilityTimer;
+			}
+		}
     }
 	#endregion
 
@@ -243,6 +253,20 @@ public abstract class EnemyController : MonoBehaviour
 		Destroy(this.gameObject);
 	}
 
+	private Transform GetParentByTag(Transform child, string tag)
+	{
+		Transform transform = child.parent;
+		while (transform != null)
+		{
+			if (transform.CompareTag(tag))
+			{
+				return transform;
+			}
+			transform = transform.parent;
+		}
+		return null;
+	}
+
 	#region Timer
 	/// <summary>
 	/// 等待计时器
@@ -272,14 +296,13 @@ public abstract class EnemyController : MonoBehaviour
 	/// </summary>
 	private void InvincibilityTimer()
 	{
-		if (m_invincibilityDuration > 0.0f)
+		if (IsInvincible)
 		{
-			m_invincibilityDuration -= Time.deltaTime;
+			if (m_invincibilityDuration > 0.0f)
+			{
+				m_invincibilityDuration -= Time.deltaTime;
+			}
 		}
-		else
-		{
-            m_invincibilityDuration = invincibilityTimer;
-        }
 	}
 	
 	/// <summary>
