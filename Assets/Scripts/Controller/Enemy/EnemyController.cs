@@ -109,10 +109,6 @@ public abstract class EnemyController : MonoBehaviour
 	#region 事件
 	[Header("事件")]
 	/// <summary>
-	/// 血量变化事件
-	/// </summary>
-	public GameEventFloat OnHealthChange;
-	/// <summary>
 	/// 受伤事件
 	/// </summary>
 	public GameEventTransform OnTakeDamage;
@@ -125,6 +121,7 @@ public abstract class EnemyController : MonoBehaviour
 	#region 组件
 	protected Rigidbody2D m_rigidBody = null;
 	protected PhysicsCheck m_check = null;
+	protected EnemyAttackHitBox m_attack = null;
 	#endregion
 
 	#region Unity 生命周期函数
@@ -133,6 +130,8 @@ public abstract class EnemyController : MonoBehaviour
 		//初始化组件
 		m_rigidBody = GetComponent<Rigidbody2D>();
 		m_check = GetComponent<PhysicsCheck>();
+		m_attack = GetComponent<EnemyAttackHitBox>();
+		m_attack.Controller = this;
 		//初始化状态机
 		m_stateMachine = new EnemyStateMachine(this, GetComponent<EnemyAnimationController>());
 		//初始化计时器
@@ -192,10 +191,23 @@ public abstract class EnemyController : MonoBehaviour
 
 	public bool TouchRight => m_check.isTouchRight;
 
+	/// <summary>
+	/// 寻找玩家
+	/// </summary>
+	/// <returns></returns>
 	public bool FindPlayer()
 	{
 		return Physics2D.BoxCast(transform.position + (Vector3)checkBoxOffset, checkBoxSize, 0, m_faceDir, detectionDistance, checkLayer);
 	}
+
+	public void Attack(Transform target, float damageMul)
+    {
+        if (target.CompareTag("Player"))
+        {
+			var playerController = target.GetComponent<PlayerController>();
+			playerController.GetHurt(transform, m_enemy.HurtForce * damageMul);
+        }
+    }
 	
 	/// <summary>
     /// 受到伤害
@@ -210,7 +222,6 @@ public abstract class EnemyController : MonoBehaviour
 			OnTakeDamage.Raise(attacker);
 			//计算血量
 			m_enemy.TakeDamage(damage);
-			Debug.Log("Enemy Health = " + m_enemy.Health);
 			if (m_enemy.Health <= 0)
 			{
 				//触发死亡

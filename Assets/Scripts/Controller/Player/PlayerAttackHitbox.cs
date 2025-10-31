@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// 攻击盒
 /// </summary>
-public class AttackHitbox : MonoBehaviour
+public class PlayerAttackHitbox : MonoBehaviour
 {
 	/// <summary>
 	/// 攻击倍率
@@ -19,9 +19,9 @@ public class AttackHitbox : MonoBehaviour
     }
 	private PlayerController m_controller = null;
 
-	private void OnCollisionStay2D(Collision2D other)
+	private void OnTriggerStay2D(Collider2D other)
 	{
-		if (m_controller != null)
+		if (m_controller)
 		{
 			//触发攻击
             m_controller.Attack(other.transform, attackMultiplier);

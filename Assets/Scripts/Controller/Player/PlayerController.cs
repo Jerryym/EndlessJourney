@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
 
 	#region 组件
 	[Header("攻击")]
-	public AttackHitbox[] attacks;
+	public PlayerAttackHitbox[] attacks;
 	private Rigidbody2D m_rigidBody = null;
 	private CapsuleCollider2D m_collider2D = null;
 	private PhysicsCheck m_check = null;
@@ -289,14 +289,41 @@ public class PlayerController : MonoBehaviour
 		OnPowerChange.Raise(powerPercent);
 	}
 
+	/// <summary>
+	/// 攻击
+	/// </summary>
 	public void Attack(Transform target, float damageMul)
-    {
-        if (target.CompareTag("Enemy"))
-        {
+	{
+		if (target.CompareTag("Enemy"))
+		{
 			var enemyController = target.GetComponent<EnemyController>();
 			enemyController.GetHurt(transform, m_player.playerCombat.Attack * damageMul);
+		}
+	}
+	
+	/// <summary>
+	/// 受到伤害
+	/// </summary>
+	public void GetHurt(Transform attacker, float damage)
+	{
+		if (!IsInvincible)
+		{
+			//触发受伤事件
+			OnTakeDamage.Raise(attacker);
+            //计算血量
+			m_player.TakeDamage(damage);
+			if (m_player.Health <= 0)
+			{
+				//触发死亡
+				OnDeath.Raise();
+			}
+			else
+			{
+				//触发无敌
+				m_invincibilityDuration = invincibilityTimer;
+			}
         }
-    }
+	}
 	#endregion
 
 	#region 私有方法
