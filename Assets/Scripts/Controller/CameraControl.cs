@@ -9,7 +9,7 @@ public class CameraControl : MonoBehaviour
 	public CinemachineImpulseSource impulseSource = null;
 	private CinemachineConfiner2D m_confiner2D = null;
 
-	public VoidEventSO cameraShakeEvent;
+	public VoidGameEventSO cameraShakeEvent;
 
 	private void Awake()
 	{
@@ -23,12 +23,12 @@ public class CameraControl : MonoBehaviour
 
 	private void OnEnable()
 	{
-		cameraShakeEvent.OnEventRaised += OnCameraShakeEvent;
+		cameraShakeEvent.Subscribe(OnCameraShakeEvent);
 	}
 
 	private void OnDisable()
 	{
-		cameraShakeEvent.OnEventRaised -= OnCameraShakeEvent;
+		cameraShakeEvent.Unsubscribe(OnCameraShakeEvent);
 	}
 
 	private void OnCameraShakeEvent()

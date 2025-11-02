@@ -116,19 +116,19 @@ public class PlayerController : MonoBehaviour
 	/// <summary>
 	/// 血量变化事件
 	/// </summary>
-	public GameEventFloat OnHealthChange;
+	public FloatGameEventSO OnHealthChange;
 	/// <summary>
 	/// 体力变化事件
 	/// </summary>
-	public GameEventFloat OnPowerChange;
+	public FloatGameEventSO OnPowerChange;
 	/// <summary>
 	/// 受伤事件
 	/// </summary>
-	public GameEventTransform OnTakeDamage;
+	public TransformGameEventSO OnTakeDamage;
 	/// <summary>
 	/// 死亡事件
 	/// </summary>
-	public GameEventVoid OnDeath;
+	public VoidGameEventSO OnDeath;
 	#endregion
 
 	#region 组件
@@ -203,12 +203,6 @@ public class PlayerController : MonoBehaviour
 
 	private void OnTriggerStay2D(Collider2D other)
 	{
-		//跳跃过程中不发生碰撞
-		if (m_isJump)
-		{
-			return;
-		}
-
 		if (other.CompareTag("River"))//落入河中，触发死亡
 		{
 			//触发血量变化事件
@@ -308,21 +302,25 @@ public class PlayerController : MonoBehaviour
 	{
 		if (!IsInvincible)
 		{
-			//触发受伤事件
-			OnTakeDamage.Raise(attacker);
-            //计算血量
+			//计算血量
 			m_player.TakeDamage(damage);
-			if (m_player.Health <= 0)
+			if (!m_player.IsMiss)//没有闪避成功
 			{
-				//触发死亡
-				OnDeath.Raise();
+				//触发受伤事件
+				OnTakeDamage.Raise(attacker);
+				OnHealthChange.Raise(m_player.Health / m_player.playerBasic.MaxHealth);
+				if (m_player.Health <= 0)
+				{
+					//触发死亡
+					OnDeath.Raise();
+				}
+				else
+				{
+					//触发无敌
+					m_invincibilityDuration = invincibilityTimer;
+				}
 			}
-			else
-			{
-				//触发无敌
-				m_invincibilityDuration = invincibilityTimer;
-			}
-        }
+		}
 	}
 	#endregion
 
@@ -366,12 +364,12 @@ public class PlayerController : MonoBehaviour
 	private void InvincibilityTimer()
 	{
 		if (IsInvincible)
-        {
+		{
 			if (m_invincibilityDuration > 0.0f)
 			{
 				m_invincibilityDuration -= Time.deltaTime;
 			}
-        }
+		}
 	}
 
 	/// <summary>

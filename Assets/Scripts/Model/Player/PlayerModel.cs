@@ -26,8 +26,20 @@ public class PlayerModel
 	[field: SerializeField]
 	public float HurtForce { get; set; } = 8f;
 
+	[field: SerializeField]
+	/// <summary>
+	/// 最大连续未触发闪避次数
+	/// </summary>
+	public int maxMissesCount { get; set; } = 5;
+	public bool IsMiss => m_isMiss;
+
 	private float m_currentHealth = 0.0f;
 	private float m_currentPower = 0.0f;
+	/// <summary>
+	/// 连续未闪避的次数
+	/// </summary>
+	private int m_consecutiveMisses = 0;
+	private bool m_isMiss = false;
 
 	public PlayerModel() 
 	{
@@ -48,10 +60,15 @@ public class PlayerModel
 		//闪避判定
 		float rEvasionChance = playerCombat.Evasion / (playerCombat.Evasion + 150f);
 		float rRandValue = UnityEngine.Random.value;
-		if (rRandValue < rEvasionChance)
+		if (m_consecutiveMisses >= maxMissesCount || rRandValue < rEvasionChance)
 		{
+			m_consecutiveMisses = 0;
+			m_isMiss = true;
+			Debug.Log("玩家闪避成功！");
 			return;
 		}
+		m_consecutiveMisses++;
+		m_isMiss = false;
 
 		//伤害计算
 		float rDamageReductionRate = playerCombat.Defence / (playerCombat.Defence + 10f);
@@ -84,7 +101,7 @@ public class PlayerModel
 	public float Health
 	{
 		get { return m_currentHealth; }
-		set { m_currentPower = value; }
+		set { m_currentHealth = value; }
 	}
 
 	public float Power

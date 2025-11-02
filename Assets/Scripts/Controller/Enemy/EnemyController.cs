@@ -111,11 +111,11 @@ public abstract class EnemyController : MonoBehaviour
 	/// <summary>
 	/// 受伤事件
 	/// </summary>
-	public GameEventTransform OnTakeDamage;
+	public TransformGameEventSO OnTakeDamage;
 	/// <summary>
 	/// 死亡事件
 	/// </summary>
-	public GameEventVoid OnDeath;
+	public VoidGameEventSO OnDeath;
 	#endregion
 
 	#region 组件

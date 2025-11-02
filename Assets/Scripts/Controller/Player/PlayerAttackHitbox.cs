@@ -13,10 +13,10 @@ public class PlayerAttackHitbox : MonoBehaviour
 	public float attackMultiplier;
 
 	public PlayerController Controller
-    {
+	{
 		get { return m_controller; }
 		set { m_controller = value; }
-    }
+	}
 	private PlayerController m_controller = null;
 
 	private void OnTriggerStay2D(Collider2D other)
@@ -24,7 +24,7 @@ public class PlayerAttackHitbox : MonoBehaviour
 		if (m_controller)
 		{
 			//触发攻击
-            m_controller.Attack(other.transform, attackMultiplier);
-        }
+			m_controller.Attack(other.transform, attackMultiplier);
+		}
 	}
 }

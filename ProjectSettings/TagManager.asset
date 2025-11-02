@@ -8,6 +8,7 @@ TagManager:
   - River
   - Enemy
   - AttackArea
+  - Chest
   layers:
   - Default
   - TransparentFX
