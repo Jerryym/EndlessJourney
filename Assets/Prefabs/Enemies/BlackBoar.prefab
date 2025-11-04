@@ -15,12 +15,12 @@ GameObject:
   - component: {fileID: 7343187238823802103}
   - component: {fileID: 6070335112286717385}
   - component: {fileID: 5173909618779496160}
+  - component: {fileID: 6489703055082893831}
   - component: {fileID: 1910557876168090832}
-  - component: {fileID: 2875557930060784048}
-  - component: {fileID: 4576481254436399664}
+  - component: {fileID: 653171106343888880}
   m_Layer: 8
   m_Name: BlackBoar
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2018184521
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1826450654, guid: fa8d0e4cb54507c45a8ce96972d227c7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -240,6 +240,36 @@ MonoBehaviour:
   isOnGround: 0
   isTouchLeft: 0
   isTouchRight: 0
+--- !u!114 &6489703055082893831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7329264741425685676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de4085e448430c347854293749c8def0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_enemy:
+    enemyBasic:
+      <MaxHealth>k__BackingField: 100
+      <Attack>k__BackingField: 10
+      <BaseSpeed>k__BackingField: 100
+      <ChaseSpeedMultiplier>k__BackingField: 2.5
+    <HurtForce>k__BackingField: 2
+  checkBoxOffset: {x: 0, y: 0.65}
+  checkBoxSize: {x: 1, y: 1}
+  detectionDistance: 4.5
+  checkLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  waitTimer: 0.5
+  invincibilityTimer: 0.2
+  lostPlayerFocusTimer: 2
+  OnTakeDamage: {fileID: 11400000, guid: 3dce960e9b66deb4795253b4474a2ccf, type: 2}
+  OnDeath: {fileID: 11400000, guid: 55c46f1969632504ea79848ba67a59e1, type: 2}
 --- !u!114 &1910557876168090832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40df282c112971d4182a29e9c36953aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2875557930060784048
+--- !u!114 &653171106343888880
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -261,79 +291,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7329264741425685676}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4a819913bfec6c4ebe0ba1421e4e49a, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb0ac08d4109854b9694b64b8f489e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
-  currentHealth: 0
-  attack: 5
-  invincibilityTime: 0.2
-  OnTakeDamage:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1910557876168090832}
-        m_TargetAssemblyTypeName: EnemyAnimationController, Assembly-CSharp
-        m_MethodName: TriggerHurt
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2875557930060784048}
-        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-        m_MethodName: OnDamage
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnDead:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2875557930060784048}
-        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-        m_MethodName: Dead
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  patrolSpeed: 100
-  chaseSpeed: 250
-  currentSpeed: 0
-  hurtForce: 7.5
-  timer: 2
-  lostPlayerTimer: 2
-  rigidBody: {fileID: 0}
-  animator: {fileID: 0}
-  check: {fileID: 0}
-  checkBoxOffset: {x: 0, y: 0.65}
-  checkBoxSize: {x: 1, y: 1}
-  detectionDistance: 4.5
-  checkLayer:
-    serializedVersion: 2
-    m_Bits: 128
---- !u!114 &4576481254436399664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7329264741425685676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c08ddf4db90798a42910b22707b3464c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  attackMultiplier: 1
+  attackFrequency: 1
