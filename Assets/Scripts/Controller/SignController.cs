@@ -39,7 +39,7 @@ public class SignController : MonoBehaviour
 
 	private void OnTriggerStay2D(Collider2D other)
 	{
-		if (other.CompareTag("Chest"))//宝箱
+		if (other.CompareTag("Chest") || other.CompareTag("Teleport"))//宝箱 || 传送门
 		{
 			m_canPress = true;
 			m_targetItem = other.GetComponent<IInteractable>();

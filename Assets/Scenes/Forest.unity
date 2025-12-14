@@ -130,6 +130,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5869159122815630560, guid: 0dc2fe7558a781547b9ac99e40101d6a, type: 3}
+      propertyPath: m_TagString
+      value: Teleport
+      objectReference: {fileID: 0}
     - target: {fileID: 7290366525121950805, guid: 0dc2fe7558a781547b9ac99e40101d6a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -783,6 +787,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ce01b6399c3afc43a4f35c9299617cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneLoadEvent: {fileID: 11400000, guid: b7673d5a70883614c9f6037f03d89473, type: 2}
+  targetScene: {fileID: 11400000, guid: 13a2497e233ee664abccb3a9f7f85394, type: 2}
   targetPosition: {x: 9.58, y: 1.08, z: 0}
 --- !u!61 &1995299409
 BoxCollider2D:
@@ -799,7 +805,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
