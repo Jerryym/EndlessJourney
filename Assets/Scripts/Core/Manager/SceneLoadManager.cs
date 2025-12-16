@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
 public class SceneLoadManager : MonoBehaviour
 {
+	public Transform playerTrans;
 	/// <summary>
 	/// 第一次加载场景对象
 	/// </summary>
@@ -23,11 +25,12 @@ public class SceneLoadManager : MonoBehaviour
 	private GameSceneSO m_targetScene;
 	private Vector3 m_targetPost;
 	private bool m_isFadeScreen = false;
+	private bool m_isLoading = false;
 
 	private void Awake()
 	{
+		firstLoadScene.sceneRef.LoadSceneAsync(LoadSceneMode.Additive);
 		m_currentScene = firstLoadScene;
-		LoadScene(m_currentScene);
 	}
 
 	private void OnEnable()
@@ -42,9 +45,13 @@ public class SceneLoadManager : MonoBehaviour
 
 	private void OnLoadRequestEvent(GameSceneSO gameScene, Vector3 position, bool isFadeScreen)
 	{
+		if (m_isLoading)
+			return;
+
 		m_targetScene = gameScene;
 		m_targetPost = position;
 		m_isFadeScreen = isFadeScreen;
+		m_isLoading = true;
 
 		Debug.Log("Target Scene: " + gameScene.name);
 
@@ -61,7 +68,23 @@ public class SceneLoadManager : MonoBehaviour
 	/// <param name="targetScene"></param>
 	private void LoadScene(GameSceneSO targetScene)
 	{
-		targetScene.sceneRef.LoadSceneAsync(LoadSceneMode.Additive, m_isFadeScreen);
+		var loadOpt = targetScene.sceneRef.LoadSceneAsync(LoadSceneMode.Additive);
+		loadOpt.Completed += OnLoadCompleted;
+	}
+
+	private void OnLoadCompleted(AsyncOperationHandle<SceneInstance> obj)
+	{
+		if (m_currentScene != m_targetScene)
+		{
+			m_currentScene = m_targetScene;
+			playerTrans.position = m_targetPost;
+			if (m_isFadeScreen)
+			{
+				//渐出
+			}
+
+			m_isLoading = false;
+		}
 	}
 
 	private IEnumerator UnLoadScene()

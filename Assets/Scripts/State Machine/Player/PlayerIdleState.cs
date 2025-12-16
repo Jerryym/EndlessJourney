@@ -19,7 +19,7 @@ public class PlayerIdleState : PlayerState
 		}
 
 		//跳跃
-		if (controller.IsOnGround && controller.IsJump)
+		if (!controller.IsOnGround || (controller.IsOnGround && controller.IsJump))
 		{
 			stateMachine.SwitchState(PlayerStateEnum.Jump);
 			return;

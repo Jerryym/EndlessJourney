@@ -31,6 +31,11 @@ public class SignController : MonoBehaviour
 		InputSystem.onActionChange += OnActionChange;
 	}
 
+	private void OnDisable()
+	{
+		m_canPress = false;
+	}
+
 	private void Update()
 	{
 		signSprite.GetComponent<SpriteRenderer>().enabled = m_canPress;
