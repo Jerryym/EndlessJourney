@@ -6,6 +6,7 @@ public class TeleportPoint : MonoBehaviour, IInteractable
 	/// 场景加载事件
 	/// </summary>
 	public SceneLoadEventSO sceneLoadEvent;
+
 	/// <summary>
 	/// 目标场景
 	/// </summary>

@@ -13,5 +13,8 @@ public class GameSceneSO : ScriptableObject
 	/// 场景资源引用
 	/// </summary>
 	public AssetReference sceneRef;
-
+	/// <summary>
+	/// 初始位置
+	/// </summary>
+	public Vector3 initialPos;
 }

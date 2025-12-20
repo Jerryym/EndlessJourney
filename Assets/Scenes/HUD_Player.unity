@@ -602,7 +602,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.459999, y: 2.7500002, z: -10}
+  m_LocalPosition: {x: -0.00000059604645, y: 1.0000002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -941,7 +941,7 @@ Transform:
   m_GameObject: {fileID: 1145557452}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.459999, y: 2.7500002, z: -10}
+  m_LocalPosition: {x: -0.00000059604645, y: 1.0000002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1013,6 +1013,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impulseSource: {fileID: 1184687723}
   cameraShakeEvent: {fileID: 11400000, guid: 7a264de0048b6db418bafdca64276819, type: 2}
+  afterLoadSceneEvent: {fileID: 11400000, guid: 4b532b6f446a41644832bcf328e6dda1, type: 2}
 --- !u!1 &1184687722
 GameObject:
   m_ObjectHideFlags: 0
@@ -1439,11 +1440,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6729994162027775820, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.46
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6729994162027775820, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6729994162027775820, guid: 7cf7bebe632a23f429a06f5a0d85c5f1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1588,9 +1589,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTrans: {fileID: 685196305}
-  firstLoadScene: {fileID: 11400000, guid: 13a2497e233ee664abccb3a9f7f85394, type: 2}
-  loadSceneEvent: {fileID: 11400000, guid: b7673d5a70883614c9f6037f03d89473, type: 2}
+  firstLoadScene: {fileID: 11400000, guid: 49b2a2d89598d1748a65a4131c54c575, type: 2}
   fadeDuration: 0
+  loadSceneEvent: {fileID: 11400000, guid: b7673d5a70883614c9f6037f03d89473, type: 2}
+  afterLoadSceneEvent: {fileID: 11400000, guid: 4b532b6f446a41644832bcf328e6dda1, type: 2}
 --- !u!4 &2015873994
 Transform:
   m_ObjectHideFlags: 0
