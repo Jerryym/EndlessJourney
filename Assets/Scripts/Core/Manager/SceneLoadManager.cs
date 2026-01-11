@@ -26,6 +26,10 @@ public class SceneLoadManager : MonoBehaviour
 	/// 场景加载完成后事件
 	/// </summary>
 	public VoidGameEventSO afterLoadSceneEvent;
+	/// <summary>
+	/// 场景渐入渐出事件
+	/// </summary>
+	public FadeEventSO fadeEvent;
 
 	/// <summary>
 	/// 当前场景
@@ -115,6 +119,7 @@ public class SceneLoadManager : MonoBehaviour
 			if (m_isFadeScreen)
 			{
 				//渐出
+				fadeEvent.FadeOut(fadeDuration);
 			}
 
 			m_isLoading = false;
@@ -126,10 +131,10 @@ public class SceneLoadManager : MonoBehaviour
 
 	private IEnumerator UnLoadScene()
 	{
-		//启用渐入渐出
+		//启用渐入
 		if (m_isFadeScreen)
 		{
-
+			fadeEvent.FadeIn(fadeDuration);
 		}
 		yield return new WaitForSeconds(fadeDuration);
 		
