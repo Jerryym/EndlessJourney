@@ -1,4 +1,5 @@
 using FSM.Enums;
+using UnityEngine;
 
 public class PlayerSquatState : PlayerState
 {
@@ -9,6 +10,7 @@ public class PlayerSquatState : PlayerState
 
 	public override void OnEnter()
 	{
+		Debug.Log("进入蹲伏状态!");
 		//修改碰撞体尺寸
 		stateMachine.Controller.ModifyColliderSize();
 	}

@@ -10,6 +10,7 @@ public class PlayerHurtState : PlayerState
 
 	public override void OnEnter()
 	{
+		Debug.Log("进入受击状态!");
 		stateMachine.Controller.IsHurt = true;
 		stateMachine.Controller.SetVelocity(Vector2.zero);
 		//触发动画

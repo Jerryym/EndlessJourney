@@ -12,6 +12,7 @@ public class PlayerJumpState : PlayerState
 
 	public override void OnEnter()
 	{
+		Debug.Log("进入跳跃状态!");
 		m_jumpCount = 0;
 		if (stateMachine.Controller.IsJump)
 		{

@@ -26,6 +26,7 @@ public class PlayerAttackState : PlayerState
 
 	public override void OnEnter()
 	{
+		Debug.Log("进入攻击状态!");
 		stateMachine.Controller.SetVelocity(Vector2.zero);
 
 		//触发动画

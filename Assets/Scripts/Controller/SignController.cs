@@ -31,6 +31,11 @@ public class SignController : MonoBehaviour
 		InputSystem.onActionChange += OnActionChange;
 	}
 
+	private void OnDisable()
+	{
+		m_canPress = false;
+	}
+
 	private void Update()
 	{
 		signSprite.GetComponent<SpriteRenderer>().enabled = m_canPress;
@@ -39,7 +44,7 @@ public class SignController : MonoBehaviour
 
 	private void OnTriggerStay2D(Collider2D other)
 	{
-		if (other.CompareTag("Chest"))//宝箱
+		if (other.CompareTag("Chest") || other.CompareTag("Teleport"))//宝箱 || 传送门
 		{
 			m_canPress = true;
 			m_targetItem = other.GetComponent<IInteractable>();

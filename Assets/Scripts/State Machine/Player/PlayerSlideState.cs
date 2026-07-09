@@ -15,6 +15,7 @@ public class PlayerSlideState : PlayerState
 
 	public override void OnEnter()
 	{
+		Debug.Log("进入滑铲状态!");
 		var controller = stateMachine.Controller;
 		//计算目标点
 		m_targetPos = new Vector3(controller.transform.position.x + controller.Player.playerMovement.SlideDistance * controller.transform.localScale.x, controller.transform.position.y);

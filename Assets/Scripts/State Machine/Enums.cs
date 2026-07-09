@@ -27,3 +27,15 @@ namespace FSM.Enums
 		Hurt
 	}
 }
+
+namespace Scene.Enums
+{
+	/// <summary>
+	/// 场景类型
+	/// </summary>
+	public enum SceneType
+	{
+		Location,
+		Menu
+	}
+}

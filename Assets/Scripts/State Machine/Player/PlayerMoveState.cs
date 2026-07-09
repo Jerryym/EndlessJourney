@@ -18,6 +18,7 @@ public class PlayerMoveState : PlayerState
 
 	public override void OnEnter()
 	{
+		Debug.Log("进入移动状态!");
 	}
 
 	public override void OnExit()
